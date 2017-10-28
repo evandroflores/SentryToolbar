@@ -7,30 +7,21 @@
 //
 
 import Foundation
-let API_TOKEN = "<TOKEN>"
-let authString = "Bearer \(API_TOKEN)"
-
-let API_BASE = "https://sentry.io"
-let ORGANIZATION_SLUG = "<org_slug>"
-let PROJECT_SLUG = "<prj_slug>"
-let ISSUES_ENDPOINT = "/api/0/projects/\(ORGANIZATION_SLUG)/\(PROJECT_SLUG)/issues/"
-let QUERY = "is:unresolved"
 
 class SentryAPI {
+    let conf = Config.loadCongig()
     func fetch(completion: ((_ result:Int64) -> Void)!) {
         let session = URLSession.shared
-        let url = URL(string: "\(API_BASE)\(ISSUES_ENDPOINT)?query=\(QUERY)")
-        var request = URLRequest(url: url!)
+        let url = conf.issueUrl()
+        var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.timeoutInterval = 10
-        request.addValue(authString, forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer \(conf.sentryToken)", forHTTPHeaderField: "Authorization")
         
         let task = session.dataTask(with: request) { data, response, err in
             if let error = err {
-                NSLog("API Error: \(error)")
-                NSLog("Token \(authString)")
+                NSLog("API Error URL[\(url)] Token[\(self.conf.sentryToken)] :\(error)")
             }
-            
             var totalIssuesCount = Int64(-1)
             
             if let httpResponse = response as? HTTPURLResponse {
@@ -47,17 +38,16 @@ class SentryAPI {
                             totalIssuesCount += Int64(issue.count)!
                         }
                         NSLog("Total issues ocurrences \(totalIssuesCount)")
-                        NSLog("URL: \(String(describing: url?.absoluteURL))")
-                        
-                        //httpResponse.allHeaderFields["Link"] // TODO: pagination
-                        
+                        // TODO: API Link pagination
                     } catch {
-                        NSLog("Error trying to parse Json: \(error))")
+                        NSLog("Error trying to parse Json URL[\(url)] Token[\(self.conf.sentryToken)] :\(error)")
+                        let rawData = String(data: data!, encoding: .utf8)
+                        NSLog("DATA: \(rawData ?? "Empty Data")")
                     }
                 case 401:
-                    NSLog("Unauthorized access for key: \(API_TOKEN)")
+                    NSLog("Unauthorized access for key: \(self.conf.sentryToken)")
                 default:
-                    NSLog("API Response: %d %@", httpResponse.statusCode, HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode))
+                    NSLog("API Response: %d %@ for url \(url)", httpResponse.statusCode, HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode))
                 }
             }
             completion(totalIssuesCount)
@@ -67,12 +57,6 @@ class SentryAPI {
 }
 
 struct Issue : Codable {
-    let id: String
-    let title: String
-    let count: String
-}
-
-struct Link : Codable {
     let id: String
     let title: String
     let count: String
