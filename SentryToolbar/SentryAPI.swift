@@ -11,6 +11,7 @@ import Foundation
 class SentryAPI {
     let conf = Config.loadCongig()
     func fetch(completion: ((_ result:Int64) -> Void)!) {
+        NSLog("SentryAPI.fetch initialized...")
         let session = URLSession.shared
         let url = conf.issueUrl()
         var request = URLRequest(url: url)

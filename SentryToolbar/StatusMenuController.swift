@@ -11,6 +11,7 @@ import Cocoa
 let UP = "\u{21E1}"
 let DOWN = "\u{21E3}"
 let UNCHANGED = "\u{00B7}"
+let ERR = "\u{1541}"
 
 class StatusMenuController: NSObject {
     @IBOutlet weak var statusMenu: NSMenu!
@@ -38,7 +39,7 @@ class StatusMenuController: NSObject {
         var newTitle = ""
         
         if total == Int64(-1) {
-            newTitle = UNCHANGED
+            newTitle = ERR
         } else if total > lastTotal {
             newTitle = "\(total) \(UP)"
         } else if total < lastTotal {

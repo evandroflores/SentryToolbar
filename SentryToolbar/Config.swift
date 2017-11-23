@@ -9,6 +9,8 @@
 import Foundation
 
 struct Config : Codable {
+    // Config will search plist file here
+    // ~/Library/Containers/br.com.eof.SentryToolbar/Data/.SentryToolbar.plist
     static let CONFIG_FILE = "\(NSHomeDirectory())/.SentryToolbar.plist"
     static let DEFAULT_API_BASE = "https://sentry.io/api/0/projects/"
     static let DEFAULT_ISSUES_ENDPOINT = "/issues/"
@@ -27,6 +29,18 @@ struct Config : Codable {
         self.organizationSlug = "orgslug"
         self.projectSlug = "prjslug"
         self.query = "is:unresolved"
+    }
+    
+    func toDict() -> [String : Any] {
+        var dict = [String:Any]()
+        let mirror = Mirror(reflecting: self)
+
+        for child in mirror.children {
+            if let key = child.label {
+                dict[key] = child.value
+            }
+        }
+        return dict
     }
     
     func issueUrl () -> URL {
@@ -68,17 +82,18 @@ struct Config : Codable {
             Config.createDefaultConfig()
         }
         
-        var settings: Config
+        var config: Config
         var data: Data
         do {
             data = try Data(contentsOf: URL(string: "file://\(Config.CONFIG_FILE)")!)
             let decoder = PropertyListDecoder()
-            settings = try decoder.decode(Config.self, from: data)
+            config = try decoder.decode(Config.self, from: data)
         } catch {
             NSLog("Fail to load config: \(error.localizedDescription)")
-            settings = Config()
+            config = Config()
         }
-        return settings
+        NSLog("\(config.toDict())")
+        return config
     }
     
     static func createDefaultConfig(){
