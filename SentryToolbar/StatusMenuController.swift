@@ -16,8 +16,8 @@ let ERR = "\u{1541}"
 class StatusMenuController: NSObject {
     @IBOutlet weak var statusMenu: NSMenu!
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-    let sentryApi = SentryAPI()
     var lastTotal = Int64(0)
+    let sentryApi = SentryAPI()
     
     override func awakeFromNib(){
         let icon = NSImage(named: NSImage.Name(rawValue: "ToolbarIcon"))
@@ -26,16 +26,20 @@ class StatusMenuController: NSObject {
         statusItem.menu = statusMenu
         statusItem.title = UNCHANGED
         
-        sentryApi.fetch(){ (result) -> Void in
-            DispatchQueue.main.async {
-                self.statusItem.title = self.getTitle(total: result)
+        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) {
+            timer in
+            DispatchQueue.global(qos: DispatchQoS.background.qosClass).async {
+                
+                self.sentryApi.fetch(){ (result) -> Void in
+                    DispatchQueue.main.async {
+                        self.updateTitle(total: result)
+                    }
+                }
             }
         }
-        
-        
-        
     }
-    func getTitle(total: Int64) -> String {
+    
+    func updateTitle(total: Int64) {
         var newTitle = ""
         
         if total == Int64(-1) {
@@ -47,14 +51,12 @@ class StatusMenuController: NSObject {
         } else {
             newTitle = "\(total) \(UNCHANGED)"
         }
-        lastTotal = total
+        self.lastTotal = total
         
-        return newTitle
+        self.statusItem.title = newTitle
     }
     
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
-    }
+    func applicationWillTerminate(_ aNotification: Notification) {}
     
     @IBAction func quitClicked(_ sender: NSMenuItem) {
         NSApplication.shared.terminate(self)
