@@ -28,10 +28,6 @@ Edit the config file to add your Sentry token, Organizationi slug, Project slug.
             <string>YOUR TOKEN</string>
         </dict>
     </array>
-    <key>sentryApiBase</key>
-    <string>https://sentry.io/api/0/projects/</string>
-    <key>sentryIssuesEndpoint</key>
-    <string>/issues/</string>
 </dict>
 </plist>
 

@@ -12,22 +12,16 @@ struct Config : Codable {
     // Config will search plist file here
     // ~/Library/Containers/br.com.eof.SentryToolbar/Data/.SentryToolbar.plist
     static let CONFIG_FILE = "\(NSHomeDirectory())/.SentryToolbar.plist"
-    static let DEFAULT_API_BASE = "https://sentry.io/api/0/projects/"
-    static let DEFAULT_ISSUES_ENDPOINT = "/issues/"
-
-    let sentryApiBase: String
-    let sentryIssuesEndpoint: String
+    static let SENTRY_API_BASE = "https://sentry.io/api/0"
+    static let SENTRY_PROJECT_ISSUES_ENDPOINT = "/projects/%@/%@/issues/"
     
     let organizations: [Organization]
     
     init(){
-        self.sentryApiBase = Config.DEFAULT_API_BASE
-        self.sentryIssuesEndpoint = Config.DEFAULT_ISSUES_ENDPOINT
-        
         let projects = [Project(slug: "your_project_slug", query: "is:unresolved")]
         self.organizations = [Organization(slug: "your_org_slug", token: "YOUR TOKEN HERE", projects: projects)]
     }
-    
+
     func toDict() -> [String : Any] {
         var dict = [String:Any]()
         let mirror = Mirror(reflecting: self)
@@ -38,30 +32,6 @@ struct Config : Codable {
             }
         }
         return dict
-    }
-    
-    func getSentryApiBase() -> String {
-        if !self.sentryApiBase.isEmpty {
-            return self.sentryApiBase
-        } else {
-            return Config.DEFAULT_API_BASE
-        }
-    }
-    
-    func getSentryIssueEndPoint() -> String {
-        if !self.sentryIssuesEndpoint.isEmpty {
-            return self.sentryIssuesEndpoint
-        } else {
-            return Config.DEFAULT_ISSUES_ENDPOINT
-        }
-    }
-    
-    func issueUrl () -> URL {
-        return URL(string: "\(self.getSentryApiBase())\(self.getSlugs())\(self.getSentryIssueEndPoint())\(self.organizations[0].projects[0].getQuery())")!
-    }
-    
-    func getSlugs() -> String {
-        return "\(self.organizations[0].slug)/\(self.organizations[0].projects[0].slug)"
     }
 
     static func loadCongig() -> Config{
