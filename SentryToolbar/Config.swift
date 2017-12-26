@@ -15,20 +15,17 @@ struct Config : Codable {
     static let DEFAULT_API_BASE = "https://sentry.io/api/0/projects/"
     static let DEFAULT_ISSUES_ENDPOINT = "/issues/"
 
-    let sentryToken: String
     let sentryApiBase: String
     let sentryIssuesEndpoint: String
-    let organizationSlug: String
-    let projectSlug: String
-    let query: String
+    
+    let organizations: [Organization]
     
     init(){
-        self.sentryToken = "YOUR TOKEN HERE"
         self.sentryApiBase = Config.DEFAULT_API_BASE
         self.sentryIssuesEndpoint = Config.DEFAULT_ISSUES_ENDPOINT
-        self.organizationSlug = "orgslug"
-        self.projectSlug = "prjslug"
-        self.query = "is:unresolved"
+        
+        let projects = [Project(slug: "your_project_slug", query: "is:unresolved")]
+        self.organizations = [Organization(slug: "your_org_slug", token: "YOUR TOKEN HERE", projects: projects)]
     }
     
     func toDict() -> [String : Any] {
@@ -41,18 +38,6 @@ struct Config : Codable {
             }
         }
         return dict
-    }
-    
-    func issueUrl () -> URL {
-        return URL(string: "\(self.getSentryApiBase())\(self.getSlugs())\(self.getSentryIssueEndPoint())\(self.getQuery())")!
-    }
-    
-    func getQuery() -> String {
-        if !self.query.isEmpty {
-            return "?query=\(self.query)"
-        } else {
-            return ""
-        }
     }
     
     func getSentryApiBase() -> String {
@@ -71,8 +56,12 @@ struct Config : Codable {
         }
     }
     
+    func issueUrl () -> URL {
+        return URL(string: "\(self.getSentryApiBase())\(self.getSlugs())\(self.getSentryIssueEndPoint())\(self.organizations[0].projects[0].getQuery())")!
+    }
+    
     func getSlugs() -> String {
-        return "\(self.organizationSlug)/\(self.projectSlug)"
+        return "\(self.organizations[0].slug)/\(self.organizations[0].projects[0].slug)"
     }
 
     static func loadCongig() -> Config{

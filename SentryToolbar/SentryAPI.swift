@@ -17,11 +17,11 @@ class SentryAPI {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.timeoutInterval = 10
-        request.addValue("Bearer \(conf.sentryToken)", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer \(conf.organizations[0].token)", forHTTPHeaderField: "Authorization")
         
         let task = session.dataTask(with: request) { data, response, err in
             if let error = err {
-                NSLog("API Error URL[\(url)] Token[\(self.conf.sentryToken)] :\(error)")
+                NSLog("API Error URL[\(url)] Token[\(self.conf.organizations[0].token)] :\(error)")
             }
             var totalIssuesCount = Int64(-1)
             
@@ -41,12 +41,12 @@ class SentryAPI {
                         NSLog("Total issues ocurrences \(totalIssuesCount)")
                         // TODO: API Link pagination
                     } catch {
-                        NSLog("Error trying to parse Json URL[\(url)] Token[\(self.conf.sentryToken)] :\(error)")
+                        NSLog("Error trying to parse Json URL[\(url)] Token[\(self.conf.organizations[0].token)] :\(error)")
                         let rawData = String(data: data!, encoding: .utf8)
                         NSLog("DATA: \(rawData ?? "Empty Data")")
                     }
                 case 401:
-                    NSLog("Unauthorized access for key: \(self.conf.sentryToken)")
+                    NSLog("Unauthorized access for key: \(self.conf.organizations[0].token)")
                 default:
                     NSLog("API Response: %d %@ for url \(url)", httpResponse.statusCode, HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode))
                 }

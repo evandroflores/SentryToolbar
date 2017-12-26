@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		340B4DB51FF29AC4006A4108 /* Organization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340B4DB41FF29AC4006A4108 /* Organization.swift */; };
+		340B4DB71FF29BC7006A4108 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340B4DB61FF29BC7006A4108 /* Project.swift */; };
 		3479767B1F87FA3D001109F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3479767A1F87FA3D001109F0 /* AppDelegate.swift */; };
 		3479767D1F87FA3D001109F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3479767C1F87FA3D001109F0 /* Assets.xcassets */; };
 		347976801F87FA3D001109F0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3479767E1F87FA3D001109F0 /* MainMenu.xib */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		340B4DB41FF29AC4006A4108 /* Organization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Organization.swift; sourceTree = "<group>"; };
+		340B4DB61FF29BC7006A4108 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		347976771F87FA3D001109F0 /* SentryToolbar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SentryToolbar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3479767A1F87FA3D001109F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3479767C1F87FA3D001109F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -58,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				3479767A1F87FA3D001109F0 /* AppDelegate.swift */,
+				340B4DB61FF29BC7006A4108 /* Project.swift */,
 				34D642FB1F89867B00AC2810 /* SentryAPI.swift */,
 				34D642F91F89781400AC2810 /* StatusMenuController.swift */,
 				3479767C1F87FA3D001109F0 /* Assets.xcassets */,
@@ -65,6 +70,7 @@
 				347976811F87FA3D001109F0 /* Info.plist */,
 				347976821F87FA3D001109F0 /* SentryToolbar.entitlements */,
 				34F0FC911FA4D16600BC33BC /* Config.swift */,
+				340B4DB41FF29AC4006A4108 /* Organization.swift */,
 			);
 			path = SentryToolbar;
 			sourceTree = "<group>";
@@ -143,7 +149,9 @@
 				34D642FA1F89781400AC2810 /* StatusMenuController.swift in Sources */,
 				34F0FC921FA4D16600BC33BC /* Config.swift in Sources */,
 				34D642FC1F89867B00AC2810 /* SentryAPI.swift in Sources */,
+				340B4DB51FF29AC4006A4108 /* Organization.swift in Sources */,
 				3479767B1F87FA3D001109F0 /* AppDelegate.swift in Sources */,
+				340B4DB71FF29BC7006A4108 /* Project.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
