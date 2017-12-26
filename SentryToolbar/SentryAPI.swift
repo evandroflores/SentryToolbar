@@ -56,9 +56,3 @@ class SentryAPI {
         task.resume()
     }
 }
-
-struct Issue : Codable {
-    let id: String
-    let title: String
-    let count: String
-}
