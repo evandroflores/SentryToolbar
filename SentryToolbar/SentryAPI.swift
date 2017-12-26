@@ -12,8 +12,6 @@ class SentryAPI {
     let conf = Config.loadCongig()
     func fetch(completion: ((_ result:Int64) -> Void)!) {
         NSLog("SentryAPI.fetch initialized...")
-        NSLog("Config.SENTRY_API_BASE[\(Config.SENTRY_API_BASE)]")
-        NSLog("String.format[\(String(format: Config.SENTRY_PROJECT_ISSUES_ENDPOINT, conf.organizations[0].slug, conf.organizations[0].projects[0].slug))]")
         
         let session = URLSession.shared
         let url = "\(Config.SENTRY_API_BASE)\(String(format: Config.SENTRY_PROJECT_ISSUES_ENDPOINT, conf.organizations[0].slug, conf.organizations[0].projects[0].slug))\(conf.organizations[0].projects[0].getQuery())"
