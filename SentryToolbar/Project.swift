@@ -11,10 +11,12 @@ import Foundation
 struct Project : Codable {
     let slug: String
     let query: String
+    var issues: [Issue]?
     
     init(slug: String, query: String){
         self.slug = slug
         self.query = query
+        self.issues = []
     }
 
     func getQuery() -> String {
@@ -23,5 +25,16 @@ struct Project : Codable {
         } else {
             return ""
         }
+    }
+
+    func getTotalIssues() -> Int64 {
+        var total = Int64(0)
+        if issues != nil {
+            for issue in issues! {
+                total += Int64(issue.count)!
+            }
+        }
+        NSLog("Project[\(self.slug)] TotalIssues[\(total)] IssuesCount [\(issues?.count)]")
+        return total
     }
 }

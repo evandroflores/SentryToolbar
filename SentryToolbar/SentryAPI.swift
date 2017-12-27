@@ -9,13 +9,14 @@
 import Foundation
 
 class SentryAPI {
-    let conf = Config.loadCongig()
-    func fetch(completion: ((_ result:Int64) -> Void)!) {
+    let conf = Config.configInstance
+    func fetch(update: (() -> Void)!) {
         NSLog("SentryAPI.fetch initialized...")
         
         for organization in conf.organizations {
             NSLog("SentryAPI.fetch Organization [\(organization.slug)]")
-            for project in organization.projects {
+
+            for var project in organization.projects {
                 NSLog("SentryAPI.fetch Organization [\(organization.slug)] Project [\(project.slug)]")
                 let session = URLSession.shared
                 let (url, token) = conf.getIssueEndpoint(organization: organization, project: project)
@@ -29,20 +30,14 @@ class SentryAPI {
                     if let error = err {
                         NSLog("API Error URL[\(url)] Token[\(token)] Error[\(error)]")
                     }
-                    var totalIssuesCount = Int64(-1)
-                    
+
                     if let httpResponse = response as? HTTPURLResponse {
                         switch httpResponse.statusCode {
                         case 200:
                             do {
                                 let decoder = JSONDecoder()
                                 let issues = try decoder.decode([Issue].self, from: data!)
-                                
-                                for issue in issues {
-                                    NSLog("Issue[\(issue.title)] Total[\(issue.count)]")
-                                    totalIssuesCount += Int64(issue.count)!
-                                }
-                                NSLog("Organization[\(organization.slug)] Project[\(project.slug)] TotalIssues[\(totalIssuesCount)]")
+                                project.issues = issues
                                 // TODO: API Link pagination
                             } catch {
                                 NSLog("Error trying to parse Json URL[\(url)] Token[\(token)] Error[\(error)]")
@@ -55,7 +50,7 @@ class SentryAPI {
                             NSLog("API Response[\(httpResponse.statusCode)] for URL[\(url)] Error[\(HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode))]")
                         }
                     }
-                    completion(totalIssuesCount)
+                    update()
                 }
                 task.resume()
             }

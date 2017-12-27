@@ -14,7 +14,9 @@ struct Config : Codable {
     static let CONFIG_FILE = "\(NSHomeDirectory())/.SentryToolbar.plist"
     static let SENTRY_API_BASE = "https://sentry.io/api/0"
     static let SENTRY_PROJECT_ISSUES_ENDPOINT = "/projects/%@/%@/issues/"
-    
+
+    static var configInstance: Config = loadConfig()
+
     let organizations: [Organization]
     
     init(){
@@ -41,7 +43,7 @@ struct Config : Codable {
         return dict
     }
 
-    static func loadCongig() -> Config{
+    static func loadConfig() -> Config{
         NSLog("Loading config \(Config.CONFIG_FILE)...")
         if (!FileManager.default.fileExists(atPath: Config.CONFIG_FILE)){
             NSLog("File \(Config.CONFIG_FILE) does not exists. Ask for creation...")

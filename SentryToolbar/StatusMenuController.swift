@@ -30,9 +30,9 @@ class StatusMenuController: NSObject {
             timer in
             DispatchQueue.global(qos: DispatchQoS.background.qosClass).async {
                 
-                self.sentryApi.fetch(){ (result) -> Void in
+                self.sentryApi.fetch(){
                     DispatchQueue.main.async {
-                        self.updateTitle(total: result)
+                        self.updateTotal()
                     }
                 }
             }
@@ -40,8 +40,14 @@ class StatusMenuController: NSObject {
         timer.fire()
     }
     
-    func updateTitle(total: Int64) {
+    func updateTotal() {
         var newTitle = ""
+
+        var total = Int64(-1)
+
+        for organization in Config.configInstance.organizations{
+            total += organization.getTotalIssues()
+        }
         
         if total == Int64(-1) {
             newTitle = ERR

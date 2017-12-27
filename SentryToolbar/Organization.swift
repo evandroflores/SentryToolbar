@@ -11,11 +11,19 @@ import Foundation
 struct Organization : Codable {
     let slug: String
     let token: String
-    let projects: [Project]
+    var projects: [Project]
     
     init (slug: String, token: String, projects: [Project]){
         self.slug = slug
         self.token = token
         self.projects = projects
+    }
+
+    func getTotalIssues() -> Int64 {
+        var total = Int64(0)
+        for project in projects {
+            total += project.getTotalIssues()
+        }
+        return total
     }
 }
