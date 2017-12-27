@@ -17,7 +17,7 @@ class SentryAPI {
             for project in organization.projects {
                 let session = URLSession.shared
                 let (url, token) = conf.getIssueEndpoint(organization: organization, project: project)
-
+        
                 var request = URLRequest(url: url)
                 request.httpMethod = "GET"
                 request.timeoutInterval = 10
@@ -28,35 +28,29 @@ class SentryAPI {
                         NSLog("API Error URL[\(url)] Token[\(token)] :\(error)")
                     }
                     var totalIssuesCount = Int64(-1)
-
+                    
                     if let httpResponse = response as? HTTPURLResponse {
                         switch httpResponse.statusCode {
                         case 200:
                             do {
                                 let decoder = JSONDecoder()
                                 let issues = try decoder.decode([Issue].self, from: data!)
-                                NSLog(String(describing: issues))
-                                NSLog(String(issues.count))
-
+                                
                                 for issue in issues {
-                                    NSLog("\(issue.title) -> \(issue.count)")
+                                    NSLog("Issue [\(issue.title)] Total [\(issue.count)]")
                                     totalIssuesCount += Int64(issue.count)!
                                 }
-                                NSLog("Total issues ocurrences \(totalIssuesCount)")
+                                NSLog("Organization [\(organization.slug)] Project [\(project.slug)] TotalIssues [\(totalIssuesCount)]")
                                 // TODO: API Link pagination
                             } catch {
-                                NSLog("Error trying to parse Json URL[\(url)] Token[\(token)] :\(error)")
+                                NSLog("Error trying to parse Json URL[\(url)] Token[\(token)] Error[\(error)]")
                                 let rawData = String(data: data!, encoding: .utf8)
                                 NSLog("DATA: \(rawData ?? "Empty Data")")
                             }
                         case 401:
                             NSLog("Unauthorized access for: URL[\(url)] Token[\(token)]")
                         default:
-                            NSLog("""
-                                    API Response: [\(httpResponse.statusCode)]
-                                    for URL[\(url)] :
-                                    \(HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode))
-                                  """)
+                            NSLog("API Response: [\(httpResponse.statusCode)] for URL[\(url)] Error[\(HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode))]")
                         }
                     }
                     completion(totalIssuesCount)
