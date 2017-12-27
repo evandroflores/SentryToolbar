@@ -22,6 +22,13 @@ struct Config : Codable {
         self.organizations = [Organization(slug: "your_org_slug", token: "YOUR TOKEN HERE", projects: projects)]
     }
 
+    func getIssueEndpoint(organization: Organization, project: Project) -> (URL, String){
+        let url = "\(Config.SENTRY_API_BASE)" +
+                  "\(String(format: Config.SENTRY_PROJECT_ISSUES_ENDPOINT, organization.slug, project.slug))" +
+                  "\(project.getQuery())"
+        return (URL(string:url)!, organization.token)
+    }
+
     func toDict() -> [String : Any] {
         var dict = [String:Any]()
         let mirror = Mirror(reflecting: self)
