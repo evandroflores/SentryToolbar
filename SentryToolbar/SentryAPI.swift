@@ -40,9 +40,8 @@ class SentryAPI {
                                 // TODO: this is terrible, I need to find a better way
                                 // TODO: API Link pagination
                             } catch {
-                                NSLog("Error trying to parse Json URL[\(url)] Token[\(token)] Error[\(error)]")
                                 let rawData = String(data: data!, encoding: .utf8)
-                                NSLog("DATA: \(rawData ?? "Empty Data")")
+                                NSLog("Error trying to parse Json URL[\(url)] Token[\(token)] Error[\(error)] RawData[\(rawData ?? "Empty Data")]")
                             }
                         case 401:
                             NSLog("Unauthorized access for: URL[\(url)] Token[\(token)]")
