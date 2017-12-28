@@ -17,7 +17,7 @@ struct Config : Codable {
 
     static var configInstance: Config = loadConfig()
 
-    let organizations: [Organization]
+    var organizations: [Organization]
     
     init(){
         let projects = [Project(slug: "your_project_slug", query: "is:unresolved")]

@@ -29,12 +29,12 @@ struct Project : Codable {
 
     func getTotalIssues() -> Int64 {
         var total = Int64(0)
-        if issues != nil {
-            for issue in issues! {
+        if self.issues != nil {
+            for issue in self.issues! {
                 total += Int64(issue.count)!
             }
         }
-        NSLog("Project[\(self.slug)] TotalIssues[\(total)] IssuesCount [\(issues?.count)]")
+        NSLog("Project[\(self.slug)] TotalIssues[\(total)] IssuesCount [\(self.issues?.count ?? 0)]")
         return total
     }
 }
