@@ -1,6 +1,6 @@
 # SentryToolbar
 
-
+This is a pet project on going that aims to create a MacOS toolbar to follow errors on Sentry.
 
 Edit the config file to add your Sentry token, Organizationi slug, Project slug...
     `~/Library/Containers/br.com.eof.SentryToolbar/Data/.SentryToolbar.plist`
