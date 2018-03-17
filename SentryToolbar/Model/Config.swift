@@ -14,6 +14,8 @@ struct Config : Codable {
     static let CONFIG_FILE = "\(NSHomeDirectory())/.SentryToolbar.plist"
     static let SENTRY_API_BASE = "https://sentry.io/api/0"
     static let SENTRY_PROJECT_ISSUES_ENDPOINT = "/projects/%@/%@/issues/"
+    static let LOOP_CYCLE_SECONDS = 60.0
+    static let API_TIMEOUT = 10.0
 
     static var configInstance: Config = loadConfig()
 

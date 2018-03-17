@@ -26,7 +26,7 @@ class StatusMenuController: NSObject {
         statusItem.menu = statusMenu
         statusItem.title = UNCHANGED
         
-        let timer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) {
+        let timer = Timer.scheduledTimer(withTimeInterval: Config.LOOP_CYCLE_SECONDS, repeats: true) {
             timer in
             DispatchQueue.global(qos: DispatchQoS.background.qosClass).async {
                 

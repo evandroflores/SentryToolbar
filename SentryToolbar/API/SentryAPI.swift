@@ -22,7 +22,7 @@ class SentryAPI {
         
                 var request = URLRequest(url: url)
                 request.httpMethod = "GET"
-                request.timeoutInterval = 10
+                request.timeoutInterval = Config.API_TIMEOUT
                 request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 
                 let task = session.dataTask(with: request) { data, response, err in
