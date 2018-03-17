@@ -64,18 +64,42 @@
 			isa = PBXGroup;
 			children = (
 				3479767A1F87FA3D001109F0 /* AppDelegate.swift */,
-				340B4DB61FF29BC7006A4108 /* Project.swift */,
-				34D642FB1F89867B00AC2810 /* SentryAPI.swift */,
-				34D642F91F89781400AC2810 /* StatusMenuController.swift */,
+				34C73499205C9605002BA603 /* API */,
+				34C73498205C95F8002BA603 /* Controller */,
 				3479767C1F87FA3D001109F0 /* Assets.xcassets */,
 				3479767E1F87FA3D001109F0 /* MainMenu.xib */,
 				347976811F87FA3D001109F0 /* Info.plist */,
 				347976821F87FA3D001109F0 /* SentryToolbar.entitlements */,
+				34C73497205C95D2002BA603 /* Model */,
+			);
+			path = SentryToolbar;
+			sourceTree = "<group>";
+		};
+		34C73497205C95D2002BA603 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				340B4DB61FF29BC7006A4108 /* Project.swift */,
 				34F0FC911FA4D16600BC33BC /* Config.swift */,
 				340B4DB41FF29AC4006A4108 /* Organization.swift */,
 				340B4DBA1FF2A245006A4108 /* Issue.swift */,
 			);
-			path = SentryToolbar;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		34C73498205C95F8002BA603 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				34D642F91F89781400AC2810 /* StatusMenuController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		34C73499205C9605002BA603 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				34D642FB1F89867B00AC2810 /* SentryAPI.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
