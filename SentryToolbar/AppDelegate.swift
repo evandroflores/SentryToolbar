@@ -10,6 +10,13 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    func applicationDidFinishLaunching(_ aNotification: Notification) {}
-    func applicationWillTerminate(_ aNotification: Notification) {}
+    let scheduler = SchedulerController()
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        NSLog("App started.")
+        scheduler.start()
+    }
+    func applicationWillTerminate(_ aNotification: Notification) {
+        scheduler.stop()
+        NSLog("App Finished.")
+    }
 }
