@@ -9,8 +9,19 @@
 import Foundation
 
 class SchedulerController: NSObject {
-    func start(){
+    var conf: Config
+    var orgs:[Organization]
+
+    override init(){
         NSLog("SchedulerController.init")
+        conf = Config.configInstance
+        orgs = conf.organizations
+    }
+
+    func start(){
+        for (_, org) in orgs.enumerated() {
+            NSLog("SchedulerController.loop.Organization [\(org.slug)]")
+        }
     }
 
     func stop(){
