@@ -48,6 +48,7 @@ class SentryAPI {
             let decoder = JSONDecoder()
             let issues = try decoder.decode([Issue].self, from: data)
             NSLog("Need to send issues here Issues[\(issues)")
+            Config.configInstance.organizations[org.slug]?.projects[proj.slug]?.issues = issues
 
         } catch {
             let rawData = String(data: data, encoding: .utf8)
