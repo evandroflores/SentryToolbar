@@ -20,7 +20,10 @@ class SchedulerController: NSObject {
 
     func start(){
         for (_, org) in orgs.enumerated() {
-            NSLog("SchedulerController.loop.Organization [\(org.slug)]")
+            NSLog("SchedulerController.loop Organization [\(org.slug)]")
+            for (_, project) in org.projects.enumerated() {
+                NSLog("SchedulerController.loop Organization [\(org.slug)] Project [\(project.slug)]")
+            }
         }
     }
 
