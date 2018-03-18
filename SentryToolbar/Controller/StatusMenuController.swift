@@ -28,7 +28,7 @@ class StatusMenuController: NSObject {
         let issueCountHandler = IssueCountHandler()
 
         issueCountHandler.onData.subscribe(with: self) { (total) in
-            self.updateTotal(total)
+            self.updateTotal(total: total)
         }
     }
     

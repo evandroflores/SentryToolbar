@@ -7,12 +7,9 @@
 //
 
 import Foundation
-import Signals
 
 class IssueCountHandler {
     let onData = Signal<Int64>()
-
-
 
     func updateCount(){
         var total = Int64(-1)

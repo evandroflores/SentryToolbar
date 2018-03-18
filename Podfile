@@ -1,4 +1,4 @@
- platform :osx, '10.12'
+ platform :osx, '10.09'
 
 target 'SentryToolbar' do
   use_frameworks!
