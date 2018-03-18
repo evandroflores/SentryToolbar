@@ -11,24 +11,27 @@ Edit the config file to add your Sentry token, Organizationi slug, Project slug.
 <plist version="1.0">
 <dict>
     <key>organizations</key>
-    <array>
+    <dict>
+        <key>your_org_slug</key>
         <dict>
             <key>projects</key>
-            <array>
+            <dict>
+                <key>your_project_slug</key>
                 <dict>
+                    <key>issues</key>
+                    <array/>
                     <key>query</key>
                     <string>is:unresolved</string>
                     <key>slug</key>
                     <string>your_project_slug</string>
                 </dict>
-            </array>
+            </dict>
             <key>slug</key>
             <string>your_org_slug</string>
             <key>token</key>
-            <string>YOUR TOKEN</string>
+            <string>YOUR TOKEN HERE</string>
         </dict>
-    </array>
+    </dict>
 </dict>
 </plist>
-
 ```
