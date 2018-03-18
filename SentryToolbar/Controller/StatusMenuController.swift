@@ -24,17 +24,17 @@ class StatusMenuController: NSObject {
         statusItem.image = icon
         statusItem.menu = statusMenu
         statusItem.title = UNCHANGED
+
+        let issueCountHandler = IssueCountHandler()
+
+        issueCountHandler.onData.subscribe(with: self) { (total) in
+            self.updateTotal(total)
+        }
     }
     
-    func updateTotal() {
+    func updateTotal(total: Int64) {
         var newTitle = ""
 
-        var total = Int64(-1)
-
-        for (_, organization) in Config.configInstance.organizations{
-            total += organization.getTotalIssues()
-        }
-        
         if total == Int64(-1) {
             newTitle = ERR
         } else if total > lastTotal {

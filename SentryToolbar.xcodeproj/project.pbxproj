@@ -17,6 +17,7 @@
 		34D642FA1F89781400AC2810 /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D642F91F89781400AC2810 /* StatusMenuController.swift */; };
 		34D642FC1F89867B00AC2810 /* SentryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D642FB1F89867B00AC2810 /* SentryAPI.swift */; };
 		34F0FC921FA4D16600BC33BC /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F0FC911FA4D16600BC33BC /* Config.swift */; };
+		D91ADBB827BB099914B078FF /* Pods_SentryToolbar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFD18D1B4398B2BA5B824641 /* Pods_SentryToolbar.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,9 @@
 		34D642F91F89781400AC2810 /* StatusMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
 		34D642FB1F89867B00AC2810 /* SentryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryAPI.swift; sourceTree = "<group>"; };
 		34F0FC911FA4D16600BC33BC /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		A6B6E64E8B86BF7E781BD8F2 /* Pods-SentryToolbar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SentryToolbar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SentryToolbar/Pods-SentryToolbar.debug.xcconfig"; sourceTree = "<group>"; };
+		B5A8A4D48A5250E9E0E4BA9B /* Pods-SentryToolbar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SentryToolbar.release.xcconfig"; path = "Pods/Target Support Files/Pods-SentryToolbar/Pods-SentryToolbar.release.xcconfig"; sourceTree = "<group>"; };
+		EFD18D1B4398B2BA5B824641 /* Pods_SentryToolbar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SentryToolbar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D91ADBB827BB099914B078FF /* Pods_SentryToolbar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +56,8 @@
 			children = (
 				347976791F87FA3D001109F0 /* SentryToolbar */,
 				347976781F87FA3D001109F0 /* Products */,
+				EB920900A1C6045A0A584EC9 /* Pods */,
+				95870BA8753E8F0127E7BEC5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +112,23 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		95870BA8753E8F0127E7BEC5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EFD18D1B4398B2BA5B824641 /* Pods_SentryToolbar.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EB920900A1C6045A0A584EC9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A6B6E64E8B86BF7E781BD8F2 /* Pods-SentryToolbar.debug.xcconfig */,
+				B5A8A4D48A5250E9E0E4BA9B /* Pods-SentryToolbar.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -112,9 +136,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 347976851F87FA3D001109F0 /* Build configuration list for PBXNativeTarget "SentryToolbar" */;
 			buildPhases = (
+				2A49E530269C4FC440CCB5DC /* [CP] Check Pods Manifest.lock */,
 				347976731F87FA3D001109F0 /* Sources */,
 				347976741F87FA3D001109F0 /* Frameworks */,
 				347976751F87FA3D001109F0 /* Resources */,
+				844A5BE459960C01E634E470 /* [CP] Embed Pods Frameworks */,
+				1DF713E626F1577CBF2A0AE0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -170,6 +197,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1DF713E626F1577CBF2A0AE0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SentryToolbar/Pods-SentryToolbar-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2A49E530269C4FC440CCB5DC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SentryToolbar-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		844A5BE459960C01E634E470 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SentryToolbar/Pods-SentryToolbar-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Signals/Signals.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Signals.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SentryToolbar/Pods-SentryToolbar-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		347976731F87FA3D001109F0 /* Sources */ = {
@@ -311,6 +392,7 @@
 		};
 		347976861F87FA3D001109F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A6B6E64E8B86BF7E781BD8F2 /* Pods-SentryToolbar.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SentryToolbar/SentryToolbar.entitlements;
@@ -327,6 +409,7 @@
 		};
 		347976871F87FA3D001109F0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5A8A4D48A5250E9E0E4BA9B /* Pods-SentryToolbar.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SentryToolbar/SentryToolbar.entitlements;
