@@ -24,11 +24,14 @@ class IssueCountHandler: NSObject {
     }
 
     @objc func updateCount(notification: NSNotification){
+        NSLog("IssueCountHandler.updateCount")
         var total = Int64(-1)
 
         for (_, organization) in Config.configInstance.organizations{
             total += organization.getTotalIssues()
         }
+
+        updateTitle(total: total)
     }
 
     func updateTitle(total: Int64) {
