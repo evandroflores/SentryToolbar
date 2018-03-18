@@ -8,45 +8,26 @@
 
 import Cocoa
 
-let UP = "\u{21E1}"
-let DOWN = "\u{21E3}"
-let UNCHANGED = "\u{00B7}"
-let ERR = "\u{1541}"
 
 class StatusMenuController: NSObject {
     @IBOutlet weak var statusMenu: NSMenu!
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-    var lastTotal = Int64(0)
-    
+    let issueCountHandler = IssueCountHandler()
+
     override func awakeFromNib(){
         let icon = NSImage(named: NSImage.Name(rawValue: "ToolbarIcon"))
         icon?.isTemplate = true
         statusItem.image = icon
         statusItem.menu = statusMenu
-        statusItem.title = UNCHANGED
+        statusItem.title = ""
 
-        let issueCountHandler = IssueCountHandler()
-
-        issueCountHandler.onData.subscribe(with: self) { (total) in
-            self.updateTotal(total: total)
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateTitle(notification:)), name: Notification.Name(IssueCountHandler.UpdateCountSig), object: nil)
     }
-    
-    func updateTotal(total: Int64) {
-        var newTitle = ""
 
-        if total == Int64(-1) {
-            newTitle = ERR
-        } else if total > lastTotal {
-            newTitle = "\(total) \(UP)"
-        } else if total < lastTotal {
-            newTitle = "\(total) \(DOWN)"
-        } else {
-            newTitle = "\(total) \(UNCHANGED)"
+    @objc func updateTitle(notification: NSNotification){
+        DispatchQueue.main.async {
+            self.statusItem.title = self.issueCountHandler.title
         }
-        self.lastTotal = total
-        
-        self.statusItem.title = newTitle
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {}

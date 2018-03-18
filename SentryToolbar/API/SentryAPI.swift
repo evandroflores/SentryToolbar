@@ -50,6 +50,8 @@ class SentryAPI {
             NSLog("Need to send issues here Issues[\(issues)")
             Config.configInstance.organizations[org.slug]?.projects[proj.slug]?.issues = issues
 
+            NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.UpdateCountSig), object: nil, userInfo: nil)
+
         } catch {
             let rawData = String(data: data, encoding: .utf8)
             NSLog("Error trying to parse Json Org[\(org.slug)] Proj[\(proj.slug)] Error[\(error)] RawData[\(rawData ?? "Empty Data")]")

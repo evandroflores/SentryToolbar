@@ -8,15 +8,41 @@
 
 import Foundation
 
-class IssueCountHandler {
-    let onData = Signal<Int64>()
+class IssueCountHandler: NSObject {
+    var lastTotal = Int64(0)
+    
+    static let UpdateCountSig = "IssueCountHandler.UpdateCount"
+    let UP = "\u{21E1}"
+    let DOWN = "\u{21E3}"
+    let UNCHANGED = "\u{00B7}"
+    let ERR = "\u{1541}"
+    var title = ""
 
-    func updateCount(){
+    override init(){
+        super.init()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateCount(notification:)), name: Notification.Name(IssueCountHandler.UpdateCountSig), object: nil)
+    }
+
+    @objc func updateCount(notification: NSNotification){
         var total = Int64(-1)
 
         for (_, organization) in Config.configInstance.organizations{
             total += organization.getTotalIssues()
         }
-        self.onData.fire(total)
+    }
+
+    func updateTitle(total: Int64) {
+        if total == Int64(-1) {
+            title = ERR
+        } else if total > lastTotal {
+            title = "\(total) \(UP)"
+        } else if total < lastTotal {
+            title = "\(total) \(DOWN)"
+        } else {
+            title = "\(total) \(UNCHANGED)"
+        }
+        self.lastTotal = total
     }
 }
+
+
