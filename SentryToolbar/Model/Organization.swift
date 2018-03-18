@@ -11,9 +11,9 @@ import Foundation
 struct Organization : Codable {
     let slug: String
     let token: String
-    var projects: [Project]
+    var projects: [String: Project]
     
-    init (slug: String, token: String, projects: [Project]){
+    init (slug: String, token: String, projects: [String: Project]){
         self.slug = slug
         self.token = token
         self.projects = projects
@@ -21,7 +21,7 @@ struct Organization : Codable {
 
     func getTotalIssues() -> Int64 {
         var total = Int64(0)
-        for project in projects {
+        for (_, project) in projects {
             total += project.getTotalIssues()
         }
         return total

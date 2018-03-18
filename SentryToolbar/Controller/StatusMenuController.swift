@@ -45,7 +45,7 @@ class StatusMenuController: NSObject {
 
         var total = Int64(-1)
 
-        for organization in Config.configInstance.organizations{
+        for (_, organization) in Config.configInstance.organizations{
             total += organization.getTotalIssues()
         }
         

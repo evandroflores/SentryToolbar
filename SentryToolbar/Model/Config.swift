@@ -19,11 +19,11 @@ struct Config : Codable {
 
     static var configInstance: Config = loadConfig()
 
-    var organizations: [Organization]
+    var organizations: [String: Organization]
     
     init(){
-        let projects = [Project(slug: "your_project_slug", query: "is:unresolved")]
-        self.organizations = [Organization(slug: "your_org_slug", token: "YOUR TOKEN HERE", projects: projects)]
+        let projects = ["your_project_slug": Project(slug: "your_project_slug", query: "is:unresolved")]
+        self.organizations = ["your_org_slug": Organization(slug: "your_org_slug", token: "YOUR TOKEN HERE", projects: projects)]
     }
 
     func getIssueEndpoint(organization: Organization, project: Project) -> (URL, String){

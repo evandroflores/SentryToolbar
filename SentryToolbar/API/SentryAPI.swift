@@ -58,10 +58,10 @@ class SentryAPI {
     func fetch(update: (() -> Void)!) {
         NSLog("SentryAPI.fetch initialized...")
         
-        for (o, organization) in Config.configInstance.organizations.enumerated() {
+        for (_, organization) in Config.configInstance.organizations {
             NSLog("SentryAPI.fetch Organization [\(organization.slug)]")
 
-            for (p, project) in organization.projects.enumerated() {
+            for (_, project) in organization.projects {
                 NSLog("SentryAPI.fetch Organization [\(organization.slug)] Project [\(project.slug)]")
                 let session = URLSession.shared
                 let (url, token) = Config.configInstance.getIssueEndpoint(organization: organization, project: project)
@@ -82,7 +82,7 @@ class SentryAPI {
                             do {
                                 let decoder = JSONDecoder()
                                 let issues = try decoder.decode([Issue].self, from: data!)
-                                Config.configInstance.organizations[o].projects[p].issues = issues
+                                Config.configInstance.organizations[organization.slug]?.projects[project.slug]?.issues = issues
                                 // TODO: this is terrible, I need to find a better way
                                 // TODO: API Link pagination
                             } catch {
