@@ -17,7 +17,6 @@ class StatusMenuController: NSObject {
     @IBOutlet weak var statusMenu: NSMenu!
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     var lastTotal = Int64(0)
-    let sentryApi = SentryAPI()
     
     override func awakeFromNib(){
         let icon = NSImage(named: NSImage.Name(rawValue: "ToolbarIcon"))
@@ -25,19 +24,6 @@ class StatusMenuController: NSObject {
         statusItem.image = icon
         statusItem.menu = statusMenu
         statusItem.title = UNCHANGED
-        
-        let timer = Timer.scheduledTimer(withTimeInterval: Config.LOOP_CYCLE_SECONDS, repeats: true) {
-            timer in
-            DispatchQueue.global(qos: DispatchQoS.background.qosClass).async {
-                
-                self.sentryApi.fetch(){
-                    DispatchQueue.main.async {
-                        self.updateTotal()
-                    }
-                }
-            }
-        }
-        timer.fire()
     }
     
     func updateTotal() {
