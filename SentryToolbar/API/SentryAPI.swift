@@ -45,7 +45,7 @@ class SentryAPI {
 
     func parseIssues(org: Organization, proj: Project, data: Data){
         do {
-            let decoder = JSONDecoder()
+            let decoder = Issue.decoder()
             let issues = try decoder.decode([Issue].self, from: data)
             Config.configInstance.organizations[org.slug]?.projects[proj.slug]?.updateIssues(newIssues: issues)
 
