@@ -17,14 +17,13 @@ class NotificationHandler: NSObject, NSUserNotificationCenterDelegate {
     }
 
     @objc func showNotification(notification: NSNotification){
-        NSLog("To show notification here...")
-
         let notification = NSUserNotification()
 
         notification.title = "New Issue Count"
         notification.subtitle = "Issue title will show here"
         notification.informativeText = "Maybe a bit more of info about the issue"
         notification.soundName = NSUserNotificationDefaultSoundName
+        notification.hasActionButton = false
 
         NSUserNotificationCenter.default.delegate = self
         NSUserNotificationCenter.default.deliver(notification)
