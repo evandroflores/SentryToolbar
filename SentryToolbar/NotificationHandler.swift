@@ -10,6 +10,8 @@ import Foundation
 
 class NotificationHandler: NSObject, NSUserNotificationCenterDelegate {
     static let NotificationSig = "NotificationSig.showNotification"
+    static let NEW_COUNT = "New Issue Count"
+    static let NEW_ISSUE = "New Issue"
 
     override init(){
         super.init()
@@ -17,17 +19,18 @@ class NotificationHandler: NSObject, NSUserNotificationCenterDelegate {
     }
 
     @objc func showNotification(notification: NSNotification){
-        let notification = NSUserNotification()
+        let issue = notification.userInfo?["issue"] as? Issue
+        let notificationType = notification.userInfo?["type"] as? String
 
-        notification.title = "New Issue Count"
-        notification.subtitle = "Issue title will show here"
-        notification.informativeText = "Maybe a bit more of info about the issue"
-        notification.soundName = NSUserNotificationDefaultSoundName
-        notification.hasActionButton = false
+        let userNotification = NSUserNotification()
+        userNotification.title = notificationType ?? NotificationHandler.NEW_COUNT
+        userNotification.subtitle = issue?.title ?? "No title provided"
+        userNotification.informativeText = "\(issue?.count ?? "-") Events \( String(describing: issue!.userCount) ) Users"
+        userNotification.soundName = NSUserNotificationDefaultSoundName
+        userNotification.hasActionButton = false
 
         NSUserNotificationCenter.default.delegate = self
-        NSUserNotificationCenter.default.deliver(notification)
-
+        NSUserNotificationCenter.default.deliver(userNotification)
     }
 
     // Overwriting setupUserNotificationCenter forcing to show messages when active
