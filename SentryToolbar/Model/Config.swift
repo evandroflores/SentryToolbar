@@ -46,9 +46,9 @@ struct Config : Codable {
     }
 
     static func loadConfig() -> Config{
-        NSLog("Loading config \(Config.CONFIG_FILE)...")
+        NSLog("Config.loadConfig - File[\(Config.CONFIG_FILE)]...")
         if (!FileManager.default.fileExists(atPath: Config.CONFIG_FILE)){
-            NSLog("File \(Config.CONFIG_FILE) does not exists. Ask for creation...")
+            NSLog("Config.loadConfig - File [\(Config.CONFIG_FILE)] does not exists. Creating a sample...")
             Config.createDefaultConfig()
         }
         
@@ -59,10 +59,10 @@ struct Config : Codable {
             let decoder = PropertyListDecoder()
             config = try decoder.decode(Config.self, from: data)
         } catch {
-            NSLog("Fail to load config: \(error.localizedDescription)")
+            NSLog("Config.loadConfig - Fail to parse config: \(error.localizedDescription)")
             config = Config()
         }
-        NSLog("\(config.toDict())")
+        NSLog("Config.loadConfig - Success: \(config.toDict())")
         return config
     }
     
@@ -74,7 +74,7 @@ struct Config : Codable {
             let data = try encoder.encode(config)
             try data.write(to: URL(string: "file://\(Config.CONFIG_FILE)")!)
         } catch {
-            NSLog("Fail to write default config: \(Config.CONFIG_FILE): \(error.localizedDescription)")
+            NSLog("Config.createDefaultConfig - Fail to write default config: \(Config.CONFIG_FILE): \(error.localizedDescription)")
         }
     }
 }
