@@ -46,9 +46,9 @@ class SentryAPI {
     func parseIssues(org: Organization, proj: Project, data: Data){
         do {
             let decoder = JSONDecoder()
+            NSLog(String(data: data, encoding: .utf8)!)
             let issues = try decoder.decode([Issue].self, from: data)
-            NSLog("Need to send issues here Issues[\(issues)")
-            Config.configInstance.organizations[org.slug]?.projects[proj.slug]?.issues = issues
+            Config.configInstance.organizations[org.slug]?.projects[proj.slug]?.updateIssues(newIssues: issues)
 
             NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.UpdateCountSig), object: nil, userInfo: nil)
 

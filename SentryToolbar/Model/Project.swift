@@ -37,4 +37,8 @@ struct Project : Codable {
         NSLog("Project [\(self.slug)] TotalIssues [\(total)] IssuesCount [\(self.issues?.count ?? 0)]")
         return total
     }
+
+    mutating func updateIssues(newIssues: [Issue]){
+        self.issues = newIssues
+    }
 }
