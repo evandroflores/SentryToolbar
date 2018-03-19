@@ -12,6 +12,7 @@ struct Issue : Codable {
     let id: String
     let title: String
     let count: String
+    let userCount: Int
     let lastSeen: Date
     let firstSeen: Date
     let permalink: String
