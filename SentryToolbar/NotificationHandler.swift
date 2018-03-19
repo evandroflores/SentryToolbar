@@ -31,11 +31,13 @@ class NotificationHandler: NSObject, NSUserNotificationCenterDelegate {
 
     }
 
+    // Overwriting setupUserNotificationCenter forcing to show messages when active
     private func setupUserNotificationCenter() {
         let nc = NSUserNotificationCenter.default
         nc.delegate = self
     }
 
+    // Overwriting userNotificationCenter forcing to show messages when ative
     public func userNotificationCenter(_ center: NSUserNotificationCenter, shouldPresent notification: NSUserNotification) -> Bool {
         return true
     }
