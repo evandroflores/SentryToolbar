@@ -1,5 +1,7 @@
 # SentryToolbar
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/53e8279f6b0df5f9c9bf/maintainability)](https://codeclimate.com/github/evandroflores/SentryToolbar/maintainability)
+
 This is a pet project ongoing that aims to create a MacOS toolbar to follow errors on Sentry.
 
 Edit the config file to add your Sentry token, Organizationi slug, Project slug...
