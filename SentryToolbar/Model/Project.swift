@@ -34,7 +34,7 @@ struct Project : Codable {
                 total += Int64(issue.count)!
             }
         }
-        NSLog("Project [\(self.slug)] TotalIssues [\(total)] IssuesCount [\(self.issues?.count ?? 0)]")
+        NSLog("Project.getTotalIssues - Project [\(self.slug)] TotalIssues [\(total)] IssuesCount [\(self.issues?.count ?? 0)]")
         return total
     }
 
