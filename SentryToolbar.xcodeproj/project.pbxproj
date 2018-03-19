@@ -10,6 +10,7 @@
 		340B4DB51FF29AC4006A4108 /* Organization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340B4DB41FF29AC4006A4108 /* Organization.swift */; };
 		340B4DB71FF29BC7006A4108 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340B4DB61FF29BC7006A4108 /* Project.swift */; };
 		340B4DBB1FF2A245006A4108 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340B4DBA1FF2A245006A4108 /* Issue.swift */; };
+		341017112060642F00450981 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341017102060642F00450981 /* NotificationHandler.swift */; };
 		3479767B1F87FA3D001109F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3479767A1F87FA3D001109F0 /* AppDelegate.swift */; };
 		3479767D1F87FA3D001109F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3479767C1F87FA3D001109F0 /* Assets.xcassets */; };
 		347976801F87FA3D001109F0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3479767E1F87FA3D001109F0 /* MainMenu.xib */; };
@@ -24,6 +25,7 @@
 		340B4DB41FF29AC4006A4108 /* Organization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Organization.swift; sourceTree = "<group>"; };
 		340B4DB61FF29BC7006A4108 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		340B4DBA1FF2A245006A4108 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
+		341017102060642F00450981 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 		347976771F87FA3D001109F0 /* SentryToolbar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SentryToolbar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3479767A1F87FA3D001109F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3479767C1F87FA3D001109F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				347976821F87FA3D001109F0 /* SentryToolbar.entitlements */,
 				34C73497205C95D2002BA603 /* Model */,
 				34BFEA5B205F197900283141 /* IssueCountHandler.swift */,
+				341017102060642F00450981 /* NotificationHandler.swift */,
 			);
 			path = SentryToolbar;
 			sourceTree = "<group>";
@@ -186,6 +189,7 @@
 				340B4DB51FF29AC4006A4108 /* Organization.swift in Sources */,
 				34BFEA5C205F197900283141 /* IssueCountHandler.swift in Sources */,
 				3479767B1F87FA3D001109F0 /* AppDelegate.swift in Sources */,
+				341017112060642F00450981 /* NotificationHandler.swift in Sources */,
 				340B4DB71FF29BC7006A4108 /* Project.swift in Sources */,
 				34C7349F205EA2AD002BA603 /* SchedulerController.swift in Sources */,
 			);

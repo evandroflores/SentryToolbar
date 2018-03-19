@@ -11,6 +11,8 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     let scheduler = SchedulerController()
+    let notification = NotificationHandler()
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         NSLog("App started.")
         scheduler.start()

@@ -40,14 +40,20 @@ struct Project : Codable {
 
     mutating func updateIssues(newIssues: [Issue]){
         self.issues = newIssues
-        // TODO: Check if the issue is new and alert
+        self.warnNewIssuesOrCount()
+    }
 
+    func warnNewIssuesOrCount(){
         let lastRun = Date().addingTimeInterval(Config.LOOP_CYCLE_SECONDS * -1)
         for issue in issues!{
             let diff = issue.lastSeen.timeIntervalSince(lastRun)
-            NSLog("DATA DIFF \(lastRun) \(issue.lastSeen) \(diff)")
             if diff > 0 {
-                NSLog("NEW ISSUE \(diff) \(issue)")
+                if issue.firstSeen == issue.lastSeen {
+                    NSLog("NEW ISSUE \(diff) \(issue)")
+                }else{
+                    NSLog("NEW ISSUE COUNT since last check \(diff) \(issue)")
+                    NotificationCenter.default.post(name: Notification.Name(NotificationHandler.NotificationSig), object: nil, userInfo: nil)
+                }
             }
         }
     }
