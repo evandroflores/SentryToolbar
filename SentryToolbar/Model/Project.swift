@@ -40,5 +40,6 @@ struct Project : Codable {
 
     mutating func updateIssues(newIssues: [Issue]){
         self.issues = newIssues
+        // TODO: Check if the issue is new and alert
     }
 }
