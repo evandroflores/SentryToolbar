@@ -25,7 +25,7 @@ class SchedulerController: NSObject {
         for (_, org) in conf.organizations {
             NSLog("SchedulerController.loop Organization [\(org.slug)]")
             for (_, proj) in org.projects {
-                NSLog("SchedulerController.loop Organization [\(org.slug)] Project [\(proj.slug)]")
+                NSLog("SchedulerController.loop Organization [\(org.slug)] Project [\(proj.slug)] Query [\(proj.query)]")
 
                 DispatchQueue.global(qos: DispatchQoS.background.qosClass).async {
                     self.sentryApi.fetchIssues(org: org, proj: proj)

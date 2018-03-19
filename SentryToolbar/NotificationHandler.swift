@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Cocoa
 
 class NotificationHandler: NSObject, NSUserNotificationCenterDelegate {
     static let NotificationSig = "NotificationSig.showNotification"
@@ -24,13 +25,21 @@ class NotificationHandler: NSObject, NSUserNotificationCenterDelegate {
 
         let userNotification = NSUserNotification()
         userNotification.title = notificationType ?? NotificationHandler.NEW_COUNT
-        userNotification.subtitle = issue?.title ?? "No title provided"
+        userNotification.subtitle = issue?.title ?? "Issue"
         userNotification.informativeText = "\(issue?.count ?? "-") Events \( String(describing: issue!.userCount) ) Users"
         userNotification.soundName = NSUserNotificationDefaultSoundName
         userNotification.hasActionButton = false
+        userNotification.userInfo = ["permalink": issue?.permalink ?? "https://sentry.io"]
 
         NSUserNotificationCenter.default.delegate = self
         NSUserNotificationCenter.default.deliver(userNotification)
+    }
+
+    public func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
+        let permalink = notification.userInfo?["permalink"] as! String
+
+        let url = URL(string: permalink)
+        NSWorkspace.shared.open(url!)
     }
 
     // Overwriting setupUserNotificationCenter forcing to show messages when active
