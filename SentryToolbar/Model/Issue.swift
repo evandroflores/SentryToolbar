@@ -14,6 +14,7 @@ struct Issue : Codable {
     let count: String
     let lastSeen: Date
     let firstSeen: Date
+    let permalink: String
 
     static func decoder() -> JSONDecoder {
         let decoder = JSONDecoder()
