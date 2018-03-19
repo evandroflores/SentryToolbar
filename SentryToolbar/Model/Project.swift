@@ -41,5 +41,14 @@ struct Project : Codable {
     mutating func updateIssues(newIssues: [Issue]){
         self.issues = newIssues
         // TODO: Check if the issue is new and alert
+
+        let lastRun = Date().addingTimeInterval(Config.LOOP_CYCLE_SECONDS * -1)
+        for issue in issues!{
+            let diff = issue.lastSeen.timeIntervalSince(lastRun)
+            NSLog("DATA DIFF \(lastRun) \(issue.lastSeen) \(diff)")
+            if diff > 0 {
+                NSLog("NEW ISSUE \(diff) \(issue)")
+            }
+        }
     }
 }

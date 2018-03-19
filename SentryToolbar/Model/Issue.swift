@@ -10,7 +10,6 @@ import Foundation
 
 struct Issue : Codable {
     let id: String
-    let shortId: String
     let title: String
     let count: String
     let lastSeen: Date
