@@ -50,6 +50,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		345E0AF02060929600169A45 /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				34BFEA5B205F197900283141 /* IssueCountHandler.swift */,
+				341017102060642F00450981 /* NotificationHandler.swift */,
+			);
+			path = Handlers;
+			sourceTree = "<group>";
+		};
 		3479766E1F87FA3D001109F0 = {
 			isa = PBXGroup;
 			children = (
@@ -77,8 +86,7 @@
 				347976811F87FA3D001109F0 /* Info.plist */,
 				347976821F87FA3D001109F0 /* SentryToolbar.entitlements */,
 				34C73497205C95D2002BA603 /* Model */,
-				34BFEA5B205F197900283141 /* IssueCountHandler.swift */,
-				341017102060642F00450981 /* NotificationHandler.swift */,
+				345E0AF02060929600169A45 /* Handlers */,
 			);
 			path = SentryToolbar;
 			sourceTree = "<group>";
