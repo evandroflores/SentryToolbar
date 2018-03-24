@@ -49,13 +49,9 @@ struct Project : Codable {
             let diff = issue.lastSeen.timeIntervalSince(lastRun)
             if diff > 0 {
                 var notificationData: [String: Any]
-                if issue.firstSeen == issue.lastSeen {
-                    NSLog("NEW ISSUE \(diff) \(issue)")
-                    notificationData = ["type": NotificationHandler.NEW_ISSUE, "issue": issue]
-                }else{
-                    NSLog("NEW ISSUE COUNT since last check \(diff) \(issue)")
-                    notificationData = ["type": NotificationHandler.NEW_COUNT, "issue": issue]
-                }
+                    notificationData = [
+                        "type": issue.firstSeen == issue.lastSeen ? NotificationHandler.NEW_ISSUE: NotificationHandler.NEW_COUNT,
+                        "issue": issue]
                 NotificationCenter.default.post(name: Notification.Name(NotificationHandler.NotificationSig), object: nil, userInfo: notificationData)
             }
         }
