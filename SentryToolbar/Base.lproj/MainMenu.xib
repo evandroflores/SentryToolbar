@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -16,11 +16,19 @@
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <customObject id="m2G-xd-dxD" customClass="StatusMenuController" customModule="SentryToolbar" customModuleProvider="target">
             <connections>
+                <outlet property="preferencesClicked" destination="xrG-yf-07Z" id="Lc8-3p-qgz"/>
                 <outlet property="statusMenu" destination="B27-Eu-R3c" id="g3P-xi-Zhe"/>
             </connections>
         </customObject>
         <menu id="B27-Eu-R3c">
             <items>
+                <menuItem title="Preferences..." id="xrG-yf-07Z">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="preferencesClicked:" target="m2G-xd-dxD" id="udI-ta-FLM"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="FG7-zo-nIB"/>
                 <menuItem title="Quit" id="Cx7-ML-LT4">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
