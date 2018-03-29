@@ -15,6 +15,8 @@
 		3479767D1F87FA3D001109F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3479767C1F87FA3D001109F0 /* Assets.xcassets */; };
 		347976801F87FA3D001109F0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3479767E1F87FA3D001109F0 /* MainMenu.xib */; };
 		34BFEA5C205F197900283141 /* IssueCountHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BFEA5B205F197900283141 /* IssueCountHandler.swift */; };
+		34C41957206D67F70072AE21 /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C41955206D67F70072AE21 /* PreferencesWindow.swift */; };
+		34C41958206D67F70072AE21 /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34C41956206D67F70072AE21 /* PreferencesWindow.xib */; };
 		34C7349F205EA2AD002BA603 /* SchedulerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C7349E205EA2AD002BA603 /* SchedulerController.swift */; };
 		34D642FA1F89781400AC2810 /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D642F91F89781400AC2810 /* StatusMenuController.swift */; };
 		34D642FC1F89867B00AC2810 /* SentryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D642FB1F89867B00AC2810 /* SentryAPI.swift */; };
@@ -33,6 +35,8 @@
 		347976811F87FA3D001109F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		347976821F87FA3D001109F0 /* SentryToolbar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SentryToolbar.entitlements; sourceTree = "<group>"; };
 		34BFEA5B205F197900283141 /* IssueCountHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCountHandler.swift; sourceTree = "<group>"; };
+		34C41955206D67F70072AE21 /* PreferencesWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
+		34C41956206D67F70072AE21 /* PreferencesWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesWindow.xib; sourceTree = "<group>"; };
 		34C7349E205EA2AD002BA603 /* SchedulerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerController.swift; sourceTree = "<group>"; };
 		34D642F91F89781400AC2810 /* StatusMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
 		34D642FB1F89867B00AC2810 /* SentryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryAPI.swift; sourceTree = "<group>"; };
@@ -106,6 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				34D642F91F89781400AC2810 /* StatusMenuController.swift */,
+				34C41955206D67F70072AE21 /* PreferencesWindow.swift */,
+				34C41956206D67F70072AE21 /* PreferencesWindow.xib */,
 				34C7349E205EA2AD002BA603 /* SchedulerController.swift */,
 			);
 			path = Controller;
@@ -179,6 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3479767D1F87FA3D001109F0 /* Assets.xcassets in Resources */,
+				34C41958206D67F70072AE21 /* PreferencesWindow.xib in Resources */,
 				347976801F87FA3D001109F0 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -200,6 +207,7 @@
 				341017112060642F00450981 /* NotificationHandler.swift in Sources */,
 				340B4DB71FF29BC7006A4108 /* Project.swift in Sources */,
 				34C7349F205EA2AD002BA603 /* SchedulerController.swift in Sources */,
+				34C41957206D67F70072AE21 /* PreferencesWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

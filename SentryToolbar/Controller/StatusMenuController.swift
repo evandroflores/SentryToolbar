@@ -12,9 +12,12 @@ import Cocoa
 class StatusMenuController: NSObject {
     @IBOutlet weak var statusMenu: NSMenu!
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+    var preferencesWindow: PreferencesWindow!
     let issueCountHandler = IssueCountHandler()
 
     override func awakeFromNib(){
+        preferencesWindow = PreferencesWindow(windowNibName: NSNib.Name(rawValue: "PreferencesWindow"))
+
         let icon = NSImage(named: NSImage.Name(rawValue: "ToolbarIcon"))
         icon?.isTemplate = true
         statusItem.image = icon
@@ -34,6 +37,7 @@ class StatusMenuController: NSObject {
     
     @IBAction func preferencesClicked(_ sender: NSMenuItem) {
         NSLog("Prefs clicked")
+        preferencesWindow.showWindow(nil)
     }
     @IBAction func quitClicked(_ sender: NSMenuItem) {
         NSApplication.shared.terminate(self)
