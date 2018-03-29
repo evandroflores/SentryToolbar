@@ -33,6 +33,7 @@ class StatusMenuController: NSObject {
     func applicationWillTerminate(_ aNotification: Notification) {}
     
     @IBAction func preferencesClicked(_ sender: NSMenuItem) {
+        NSLog("Prefs clicked")
     }
     @IBAction func quitClicked(_ sender: NSMenuItem) {
         NSApplication.shared.terminate(self)
