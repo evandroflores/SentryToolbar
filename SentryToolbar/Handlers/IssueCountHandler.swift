@@ -25,7 +25,7 @@ class IssueCountHandler: NSObject {
 
     @objc func updateCount(notification: NSNotification){
         NSLog("IssueCountHandler.updateCount")
-        var total = Int64(-1)
+        var total = Int64(0)
 
         for (_, organization) in Config.configInstance.organizations{
             total += organization.getTotalIssues()
@@ -35,9 +35,7 @@ class IssueCountHandler: NSObject {
     }
 
     func updateTitle(total: Int64) {
-        if total == Int64(-1) {
-            title = ERR
-        } else if total > lastTotal {
+        if total > lastTotal {
             title = "\(total) \(UP)"
         } else if total < lastTotal {
             title = "\(total) \(DOWN)"
