@@ -9,13 +9,10 @@
 import Cocoa
 
 class PreferencesWindow: NSWindowController {
-    override func windowDidLoad() {
-        NSLog("window loaded")
-        super.windowDidLoad()
-
+    override func showWindow(_ sender: Any?) {
+        super.showWindow(sender)
         self.window?.center()
         self.window?.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
     }
-    
 }
