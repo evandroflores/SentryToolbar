@@ -44,7 +44,6 @@ struct Project : Codable {
     }
 
     func warnNewIssuesOrEventCount(){
-        NSLog("WarnNewIssuesOrCount...")
         let lastRun = Date().addingTimeInterval(Config.LOOP_CYCLE_SECONDS * -1)
         for issue in issues!{
             let diff = issue.lastSeen.timeIntervalSince(lastRun)

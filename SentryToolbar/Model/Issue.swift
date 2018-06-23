@@ -20,7 +20,7 @@ struct Issue : Codable {
     static func decoder() -> JSONDecoder {
         let decoder = JSONDecoder()
         let dateFormat = DateFormatter()
-        dateFormat.locale = Locale(identifier: "en_US_POSIX")
+        dateFormat.timeZone = TimeZone(identifier:"GMT")
         dateFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z"
         decoder.dateDecodingStrategy = .formatted(dateFormat)
         return decoder
