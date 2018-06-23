@@ -11,7 +11,7 @@ import Cocoa
 
 class NotificationHandler: NSObject, NSUserNotificationCenterDelegate {
     static let NotificationSig = "NotificationSig.showNotification"
-    static let NEW_COUNT = "New Issue Count"
+    static let NEW_EVENT_COUNT = "New Issue Event"
     static let NEW_ISSUE = "New Issue"
 
     override init(){
@@ -24,7 +24,7 @@ class NotificationHandler: NSObject, NSUserNotificationCenterDelegate {
         let notificationType = notification.userInfo?["type"] as? String
 
         let userNotification = NSUserNotification()
-        userNotification.title = notificationType ?? NotificationHandler.NEW_COUNT
+        userNotification.title = notificationType ?? NotificationHandler.NEW_EVENT_COUNT
         userNotification.subtitle = issue?.title ?? "Issue"
         userNotification.informativeText = "\(issue?.count ?? "-") Events \( String(describing: issue!.userCount) ) Users"
         userNotification.soundName = NSUserNotificationDefaultSoundName

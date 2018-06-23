@@ -22,7 +22,7 @@ struct Organization : Codable {
     func getTotalIssues() -> Int64 {
         var total = Int64(0)
         for (_, project) in projects {
-            total += project.getTotalIssues()
+            total += project.getEventSum()
         }
         return total
     }
