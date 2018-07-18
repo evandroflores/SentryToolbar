@@ -9,8 +9,17 @@
 import Foundation
 
 class SentryAPI {
+    static let API_BASE = "https://sentry.io/api/0"
+    static let ISSUES_ENDPOINT = "/projects/%@/%@/issues/"
+
+    func getIssueEndpoint(filter: Filter) -> URL{
+        return URL(string:"\(SentryAPI.API_BASE)" +
+            "\(String(format: SentryAPI.ISSUES_ENDPOINT, filter.organizationSlug, filter.projectSlug))" +
+            "\(getQueryParam(query: filter.query))")!
+    }
+
     func fetchIssues(filter: Filter){
-        let url = Config.configInstance.getIssueEndpoint(filter: filter)
+        let url = getIssueEndpoint(filter: filter)
         let token = Config.configInstance.token
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -54,6 +63,14 @@ class SentryAPI {
         } catch {
             let rawData = String(data: data, encoding: .utf8)
             NSLog("Error trying to parse Json Filter[\(filter.name)] Error[\(error)] RawData[\(rawData ?? "Empty Data")]")
+        }
+    }
+
+    func getQueryParam(query: String) -> String {
+        if query.isEmpty {
+            return ""
+        } else {
+            return "?query=\(query)"
         }
     }
 }

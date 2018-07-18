@@ -24,14 +24,6 @@ struct Filter : Codable {
         self.issues = []
     }
 
-    func getQuery() -> String {
-        if self.query.isEmpty {
-            return ""
-        } else {
-            return "?query=\(self.query)"
-        }
-    }
-
     func getEventSum() -> Int64 {
         var totalEvents = Int64(0)
         if self.issues != nil {

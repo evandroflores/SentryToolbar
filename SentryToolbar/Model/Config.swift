@@ -12,8 +12,6 @@ struct Config : Codable {
     // Config will search plist file here
     // ~/Library/Containers/br.com.eof.SentryToolbar/Data/.SentryToolbar.plist
     static let CONFIG_FILE = "\(NSHomeDirectory())/.SentryToolbar.plist"
-    static let SENTRY_API_BASE = "https://sentry.io/api/0"
-    static let SENTRY_PROJECT_ISSUES_ENDPOINT = "/projects/%@/%@/issues/"
     static let LOOP_CYCLE_SECONDS = 60.0
     static let API_TIMEOUT = 10.0
 
@@ -28,12 +26,6 @@ struct Config : Codable {
             "myfilterB": Filter(name: "myfilterB",organizationSlug: "orgA",projectSlug: "projectB")
         ]
         self.token = "<YOUR TOKEN HERE>"
-    }
-
-    func getIssueEndpoint(filter: Filter) -> URL{
-        return URL(string:"\(Config.SENTRY_API_BASE)" +
-                  "\(String(format: Config.SENTRY_PROJECT_ISSUES_ENDPOINT, filter.organizationSlug, filter.projectSlug))" +
-                  "\(filter.getQuery())")!
     }
 
     func toDict() -> [String : Any] {
