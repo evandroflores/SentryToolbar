@@ -24,20 +24,16 @@ class StatusMenuController: NSObject {
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateTitle(notification:)), name: Notification.Name(IssueCountHandler.updateCountSig), object: nil)
     }
-
     @objc func updateTitle(notification: NSNotification) {
         DispatchQueue.main.async {
             self.statusItem.title = self.issueCountHandler.title
         }
     }
-    
     func applicationWillTerminate(_ aNotification: Notification) {}
-    
     @IBAction func preferencesClicked(_ sender: NSMenuItem) {
         NSLog("Prefs clicked")
         preferencesWindow.showWindow(nil)
     }
-    
     @IBAction func quitClicked(_ sender: NSMenuItem) {
         NSApplication.shared.terminate(self)
     }

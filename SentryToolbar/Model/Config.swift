@@ -16,15 +16,13 @@ struct Config: Codable {
     static var configInstance: Config = loadConfig()
     var token: String
     var filters: [String: Filter]
-
-    init(){
+    init() {
         self.filters = [
             "myfilterA": Filter(name: "myfilterA", organizationSlug: "orgA", projectSlug: "projectA"),
             "myfilterB": Filter(name: "myfilterB", organizationSlug: "orgA", projectSlug: "projectB")
         ]
         self.token = "<YOUR TOKEN HERE>"
     }
-
     func toDict() -> [String: Any] {
         var dict = [String: Any]()
         let mirror = Mirror(reflecting: self)
@@ -36,10 +34,9 @@ struct Config: Codable {
         }
         return dict
     }
-
     static func loadConfig() -> Config {
         NSLog("Config.loadConfig - File[\(Config.configFile)]...")
-        if (!FileManager.default.fileExists(atPath: Config.configFile)) {
+        if !FileManager.default.fileExists(atPath: Config.configFile) {
             NSLog("Config.loadConfig - File [\(Config.configFile)] does not exists. Creating a sample...")
             Config.createDefaultConfig()
         }
@@ -57,7 +54,6 @@ struct Config: Codable {
         NSLog("Config.loadConfig - Success: \(config.toDict())")
         return config
     }
-    
     static func createDefaultConfig() {
         let encoder = PropertyListEncoder()
         encoder.outputFormat = .xml
