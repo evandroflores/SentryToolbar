@@ -9,9 +9,9 @@
 import Foundation
 
 class SentryAPI {
-    func fetchIssues(org: Organization, proj: Project){
-        let (url, token) = Config.configInstance.getIssueEndpoint(organization: org, project: proj)
-
+    func fetchIssues(filter: Filter){
+        let url = Config.configInstance.getIssueEndpoint(filter: filter)
+        let token = Config.configInstance.token
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.timeoutInterval = Config.API_TIMEOUT
@@ -27,7 +27,7 @@ class SentryAPI {
                 switch httpResponse.statusCode {
                 case 200:
                     if data != nil {
-                        self.parseIssues(org: org, proj: proj, data: data!)
+                        self.parseIssues(filter: filter, data: data!)
                     } else {
                         NSLog("Did not receive data for: URL[\(url)] Token[\(token)]")
                         return
@@ -43,17 +43,17 @@ class SentryAPI {
         task.resume()
     }
 
-    func parseIssues(org: Organization, proj: Project, data: Data){
+    func parseIssues(filter: Filter, data: Data){
         do {
             let decoder = Issue.decoder()
             let issues = try decoder.decode([Issue].self, from: data)
-            Config.configInstance.organizations[org.slug]?.projects[proj.slug]?.updateIssues(newIssues: issues)
+            Config.configInstance.filters[filter.name]?.updateIssues(newIssues: issues)
 
             NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.UpdateCountSig), object: nil, userInfo: nil)
 
         } catch {
             let rawData = String(data: data, encoding: .utf8)
-            NSLog("Error trying to parse Json Org[\(org.slug)] Proj[\(proj.slug)] Error[\(error)] RawData[\(rawData ?? "Empty Data")]")
+            NSLog("Error trying to parse Json Filter[\(filter.name)] Error[\(error)] RawData[\(rawData ?? "Empty Data")]")
         }
     }
 }

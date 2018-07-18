@@ -22,14 +22,11 @@ class SchedulerController: NSObject {
     }
 
     @objc func loop(){
-        for (_, org) in conf.organizations {
-            NSLog("SchedulerController.loop Organization [\(org.slug)]")
-            for (_, proj) in org.projects {
-                NSLog("SchedulerController.loop Organization [\(org.slug)] Project [\(proj.slug)] Query [\(proj.query)]")
+        for (_, filter) in conf.filters {
+            NSLog("SchedulerController.loop Filter [\(filter.name)] -> Organization [\(filter.organizationSlug)] Project [\(filter.projectSlug)] Query [\(filter.query)]")
 
-                DispatchQueue.global(qos: DispatchQoS.background.qosClass).async {
-                    self.sentryApi.fetchIssues(org: org, proj: proj)
-                }
+            DispatchQueue.global(qos: DispatchQoS.background.qosClass).async {
+                self.sentryApi.fetchIssues(filter: filter)
             }
         }
     }

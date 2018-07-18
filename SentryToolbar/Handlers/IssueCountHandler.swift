@@ -23,12 +23,12 @@ class IssueCountHandler: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateCount(notification:)), name: Notification.Name(IssueCountHandler.UpdateCountSig), object: nil)
     }
 
-    @objc func updateCount(notification: NSNotification){
+    @objc func updateCount(notification: NSNotification) {
         NSLog("IssueCountHandler.updateCount")
         var total = Int64(0)
 
-        for (_, organization) in Config.configInstance.organizations{
-            total += organization.getTotalIssues()
+        for (_, filter) in Config.configInstance.filters {
+            total += filter.getEventSum()
         }
 
         updateTitle(total: total)

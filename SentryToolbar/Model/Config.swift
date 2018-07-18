@@ -19,18 +19,21 @@ struct Config : Codable {
 
     static var configInstance: Config = loadConfig()
 
-    var organizations: [String: Organization]
+    var token: String
+    var filters: [String: Filter]
     
     init(){
-        let projects = ["your_project_slug": Project(slug: "your_project_slug", query: "is:unresolved")]
-        self.organizations = ["your_org_slug": Organization(slug: "your_org_slug", token: "YOUR TOKEN HERE", projects: projects)]
+        self.filters = [
+            "myfilterA": Filter(name: "myfilterA",organizationSlug: "orgA",projectSlug: "projectA"),
+            "myfilterB": Filter(name: "myfilterB",organizationSlug: "orgA",projectSlug: "projectB")
+        ]
+        self.token = "<YOUR TOKEN HERE>"
     }
 
-    func getIssueEndpoint(organization: Organization, project: Project) -> (URL, String){
-        let url = "\(Config.SENTRY_API_BASE)" +
-                  "\(String(format: Config.SENTRY_PROJECT_ISSUES_ENDPOINT, organization.slug, project.slug))" +
-                  "\(project.getQuery())"
-        return (URL(string:url)!, organization.token)
+    func getIssueEndpoint(filter: Filter) -> URL{
+        return URL(string:"\(Config.SENTRY_API_BASE)" +
+                  "\(String(format: Config.SENTRY_PROJECT_ISSUES_ENDPOINT, filter.organizationSlug, filter.projectSlug))" +
+                  "\(filter.getQuery())")!
     }
 
     func toDict() -> [String : Any] {
