@@ -9,21 +9,23 @@
 import Foundation
 
 class SentryAPI {
-    static let API_BASE = "https://sentry.io/api/0"
-    static let ISSUES_ENDPOINT = "/projects/%@/%@/issues/"
+    static let apiBaseUrl = "https://sentry.io/api/0"
+    static let issuesEndpoint = "/projects/%@/%@/issues/"
+    static let timeoutInterval = 10.0
 
-    func getIssueEndpoint(filter: Filter) -> URL{
-        return URL(string:"\(SentryAPI.API_BASE)" +
-            "\(String(format: SentryAPI.ISSUES_ENDPOINT, filter.organizationSlug, filter.projectSlug))" +
+    func getIssueEndpoint(filter: Filter) -> URL {
+        return URL(string:
+            "\(SentryAPI.apiBaseUrl)" +
+            "\(String(format: SentryAPI.issuesEndpoint, filter.organizationSlug, filter.projectSlug))" +
             "\(getQueryParam(query: filter.query))")!
     }
 
-    func fetchIssues(filter: Filter){
+    func fetchIssues(filter: Filter) {
         let url = getIssueEndpoint(filter: filter)
         let token = Config.configInstance.token
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.timeoutInterval = Config.API_TIMEOUT
+        request.timeoutInterval = SentryAPI.timeoutInterval
         request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -52,13 +54,13 @@ class SentryAPI {
         task.resume()
     }
 
-    func parseIssues(filter: Filter, data: Data){
+    func parseIssues(filter: Filter, data: Data) {
         do {
             let decoder = Issue.decoder()
             let issues = try decoder.decode([Issue].self, from: data)
             Config.configInstance.filters[filter.name]?.updateIssues(newIssues: issues)
 
-            NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.UpdateCountSig), object: nil, userInfo: nil)
+            NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.updateCountSig), object: nil, userInfo: nil)
 
         } catch {
             let rawData = String(data: data, encoding: .utf8)

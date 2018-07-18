@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Filter : Codable {
+struct Filter: Codable {
     var name: String
     var organizationSlug: String
     var projectSlug: String
@@ -16,7 +16,7 @@ struct Filter : Codable {
     var isActive: Bool = true
     var issues: [Issue]?
 
-    init(name: String, organizationSlug: String, projectSlug: String, query: String = "is:unresolved", isActive: Bool = true){
+    init(name: String, organizationSlug: String, projectSlug: String, query: String = "is:unresolved", isActive: Bool = true) {
         self.name = name
         self.organizationSlug = organizationSlug
         self.projectSlug = projectSlug
@@ -35,21 +35,21 @@ struct Filter : Codable {
         return totalEvents
     }
 
-    mutating func updateIssues(newIssues: [Issue]){
+    mutating func updateIssues(newIssues: [Issue]) {
         self.issues = newIssues
         self.warnNewIssuesOrEventCount()
     }
 
-    func warnNewIssuesOrEventCount(){
-        let lastRun = Date().addingTimeInterval(Config.LOOP_CYCLE_SECONDS * -1)
-        for issue in issues!{
+    func warnNewIssuesOrEventCount() {
+        let lastRun = Date().addingTimeInterval(Config.loopCycleSeconds * -1)
+        for issue in issues! {
             let diff = issue.lastSeen.timeIntervalSince(lastRun)
             if diff > 0 {
                 var notificationData: [String: Any]
                 notificationData = [
-                    "type": issue.firstSeen == issue.lastSeen ? NotificationHandler.NEW_ISSUE: NotificationHandler.NEW_EVENT_COUNT,
+                    "type": issue.firstSeen == issue.lastSeen ? NotificationHandler.newIssueLabel:  NotificationHandler.newEventCountLabel,
                     "issue": issue]
-                NotificationCenter.default.post(name: Notification.Name(NotificationHandler.NotificationSig), object: nil, userInfo: notificationData)
+                NotificationCenter.default.post(name: Notification.Name(NotificationHandler.notificationSig), object:  nil, userInfo: notificationData)
             }
         }
     }

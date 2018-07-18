@@ -10,21 +10,21 @@ import Foundation
 import Cocoa
 
 class NotificationHandler: NSObject, NSUserNotificationCenterDelegate {
-    static let NotificationSig = "NotificationSig.showNotification"
-    static let NEW_EVENT_COUNT = "New Issue Event"
-    static let NEW_ISSUE = "New Issue"
+    static let notificationSig = "NotificationSig.showNotification"
+    static let newEventCountLabel = "New Issue Event"
+    static let newIssueLabel = "New Issue"
 
-    override init(){
+    override init() {
         super.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.showNotification(notification:)), name: Notification.Name(NotificationHandler.NotificationSig), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.showNotification(notification:)), name: Notification.Name(NotificationHandler.notificationSig), object: nil)
     }
 
-    @objc func showNotification(notification: NSNotification){
+    @objc func showNotification(notification: NSNotification) {
         let issue = notification.userInfo?["issue"] as? Issue
         let notificationType = notification.userInfo?["type"] as? String
 
         let userNotification = NSUserNotification()
-        userNotification.title = notificationType ?? NotificationHandler.NEW_EVENT_COUNT
+        userNotification.title = notificationType ?? NotificationHandler.newEventCountLabel
         userNotification.subtitle = issue?.title ?? "Issue"
         userNotification.informativeText = "\(issue?.count ?? "-") Events \( String(describing: issue!.userCount) ) Users"
         userNotification.soundName = NSUserNotificationDefaultSoundName

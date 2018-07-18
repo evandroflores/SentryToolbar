@@ -8,28 +8,25 @@
 
 import Foundation
 
-struct Config : Codable {
+struct Config: Codable {
     // Config will search plist file here
     // ~/Library/Containers/br.com.eof.SentryToolbar/Data/.SentryToolbar.plist
-    static let CONFIG_FILE = "\(NSHomeDirectory())/.SentryToolbar.plist"
-    static let LOOP_CYCLE_SECONDS = 60.0
-    static let API_TIMEOUT = 10.0
-
+    static let configFile = "\(NSHomeDirectory())/.SentryToolbar.plist"
+    static let loopCycleSeconds = 60.0
     static var configInstance: Config = loadConfig()
-
     var token: String
     var filters: [String: Filter]
-    
+
     init(){
         self.filters = [
-            "myfilterA": Filter(name: "myfilterA",organizationSlug: "orgA",projectSlug: "projectA"),
-            "myfilterB": Filter(name: "myfilterB",organizationSlug: "orgA",projectSlug: "projectB")
+            "myfilterA": Filter(name: "myfilterA", organizationSlug: "orgA", projectSlug: "projectA"),
+            "myfilterB": Filter(name: "myfilterB", organizationSlug: "orgA", projectSlug: "projectB")
         ]
         self.token = "<YOUR TOKEN HERE>"
     }
 
-    func toDict() -> [String : Any] {
-        var dict = [String:Any]()
+    func toDict() -> [String: Any] {
+        var dict = [String: Any]()
         let mirror = Mirror(reflecting: self)
 
         for child in mirror.children {
@@ -40,17 +37,17 @@ struct Config : Codable {
         return dict
     }
 
-    static func loadConfig() -> Config{
-        NSLog("Config.loadConfig - File[\(Config.CONFIG_FILE)]...")
-        if (!FileManager.default.fileExists(atPath: Config.CONFIG_FILE)){
-            NSLog("Config.loadConfig - File [\(Config.CONFIG_FILE)] does not exists. Creating a sample...")
+    static func loadConfig() -> Config {
+        NSLog("Config.loadConfig - File[\(Config.configFile)]...")
+        if (!FileManager.default.fileExists(atPath: Config.configFile)) {
+            NSLog("Config.loadConfig - File [\(Config.configFile)] does not exists. Creating a sample...")
             Config.createDefaultConfig()
         }
         
         var config: Config
         var data: Data
         do {
-            data = try Data(contentsOf: URL(string: "file://\(Config.CONFIG_FILE)")!)
+            data = try Data(contentsOf: URL(string: "file://\(Config.configFile)")!)
             let decoder = PropertyListDecoder()
             config = try decoder.decode(Config.self, from: data)
         } catch {
@@ -61,15 +58,15 @@ struct Config : Codable {
         return config
     }
     
-    static func createDefaultConfig(){
+    static func createDefaultConfig() {
         let encoder = PropertyListEncoder()
         encoder.outputFormat = .xml
         do {
             let config = Config()
             let data = try encoder.encode(config)
-            try data.write(to: URL(string: "file://\(Config.CONFIG_FILE)")!)
+            try data.write(to: URL(string: "file://\(Config.configFile)")!)
         } catch {
-            NSLog("Config.createDefaultConfig - Fail to write default config: \(Config.CONFIG_FILE): \(error.localizedDescription)")
+            NSLog("Config.createDefaultConfig - Fail to write default config: \(Config.configFile): \(error.localizedDescription)")
         }
     }
 }

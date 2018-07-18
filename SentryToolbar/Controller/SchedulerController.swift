@@ -13,15 +13,15 @@ class SchedulerController: NSObject {
     var sentryApi: SentryAPI
     var timer: Timer!
 
-    override init(){
+    override init() {
         NSLog("SchedulerController.init")
         conf = Config.configInstance
         sentryApi = SentryAPI()
         super.init()
-        timer = Timer.scheduledTimer(timeInterval: Config.LOOP_CYCLE_SECONDS, target: self, selector: #selector(loop), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: Config.loopCycleSeconds, target: self, selector: #selector(loop), userInfo: nil, repeats: true)
     }
 
-    @objc func loop(){
+    @objc func loop() {
         for (_, filter) in conf.filters {
             NSLog("SchedulerController.loop Filter [\(filter.name)] -> Organization [\(filter.organizationSlug)] Project [\(filter.projectSlug)] Query [\(filter.query)]")
 
@@ -31,15 +31,15 @@ class SchedulerController: NSObject {
         }
     }
 
-    func start(){
+    func start() {
         timer.fire()
     }
 
-    func updateTotal(){
+    func updateTotal() {
         NSLog("SchedulerController.update")
     }
 
-    func stop(){
+    func stop() {
         NSLog("SchedulerController.stop")
         timer.invalidate()
     }
