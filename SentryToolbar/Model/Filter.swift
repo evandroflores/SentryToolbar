@@ -49,9 +49,9 @@ struct Filter: Codable {
                 notificationData = [
                     "type": issue.firstSeen == issue.lastSeen ? NotificationHandler.newIssueLabel:  NotificationHandler.newEventCountLabel,
                     "issue": issue]
-                NotificationCenter.default.post(name: Notification.Name(NotificationHandler.notificationSig), object:  nil, userInfo: notificationData)
+                NotificationCenter.default.post(name: Notification.Name(NotificationHandler.notificationSig), object: nil, userInfo: notificationData)
             }
         }
     }
-    
+
 }

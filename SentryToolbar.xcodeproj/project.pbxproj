@@ -20,6 +20,7 @@
 		34D642FA1F89781400AC2810 /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D642F91F89781400AC2810 /* StatusMenuController.swift */; };
 		34D642FC1F89867B00AC2810 /* SentryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D642FB1F89867B00AC2810 /* SentryAPI.swift */; };
 		34F0FC921FA4D16600BC33BC /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F0FC911FA4D16600BC33BC /* Config.swift */; };
+		831EA7A7CA567E055A07F91D /* Pods_SentryToolbar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4691704D9D1CC1D3DD0C2D1F /* Pods_SentryToolbar.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,9 @@
 		34D642F91F89781400AC2810 /* StatusMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
 		34D642FB1F89867B00AC2810 /* SentryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryAPI.swift; sourceTree = "<group>"; };
 		34F0FC911FA4D16600BC33BC /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		4691704D9D1CC1D3DD0C2D1F /* Pods_SentryToolbar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SentryToolbar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B7606C96BEAB85B3BC5CC71 /* Pods-SentryToolbar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SentryToolbar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SentryToolbar/Pods-SentryToolbar.debug.xcconfig"; sourceTree = "<group>"; };
+		A73D080C597C3A7F55F11635 /* Pods-SentryToolbar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SentryToolbar.release.xcconfig"; path = "Pods/Target Support Files/Pods-SentryToolbar/Pods-SentryToolbar.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,12 +50,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				831EA7A7CA567E055A07F91D /* Pods_SentryToolbar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		173DB6424F07EE4D46E9CE53 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6B7606C96BEAB85B3BC5CC71 /* Pods-SentryToolbar.debug.xcconfig */,
+				A73D080C597C3A7F55F11635 /* Pods-SentryToolbar.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		345E0AF02060929600169A45 /* Handlers */ = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +80,8 @@
 			children = (
 				347976791F87FA3D001109F0 /* SentryToolbar */,
 				347976781F87FA3D001109F0 /* Products */,
+				173DB6424F07EE4D46E9CE53 /* Pods */,
+				5C55E0D204DC7E223AD8A58A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -122,6 +138,14 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		5C55E0D204DC7E223AD8A58A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4691704D9D1CC1D3DD0C2D1F /* Pods_SentryToolbar.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -129,6 +153,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 347976851F87FA3D001109F0 /* Build configuration list for PBXNativeTarget "SentryToolbar" */;
 			buildPhases = (
+				C09D2DFAAD83CAD78323051A /* [CP] Check Pods Manifest.lock */,
+				34445B22210091AE00B0B00D /* ShellScript */,
 				347976731F87FA3D001109F0 /* Sources */,
 				347976741F87FA3D001109F0 /* Frameworks */,
 				347976751F87FA3D001109F0 /* Resources */,
@@ -188,6 +214,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		34445B22210091AE00B0B00D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = swiftlint;
+		};
+		C09D2DFAAD83CAD78323051A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SentryToolbar-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		347976731F87FA3D001109F0 /* Sources */ = {
@@ -337,6 +397,7 @@
 		};
 		347976861F87FA3D001109F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B7606C96BEAB85B3BC5CC71 /* Pods-SentryToolbar.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SentryToolbar/SentryToolbar.entitlements;
@@ -353,6 +414,7 @@
 		};
 		347976871F87FA3D001109F0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A73D080C597C3A7F55F11635 /* Pods-SentryToolbar.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SentryToolbar/SentryToolbar.entitlements;

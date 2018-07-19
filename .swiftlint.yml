@@ -1,0 +1,9 @@
+# https://github.com/realm/SwiftLint#configuration
+
+excluded:
+    - Pods
+
+identifier_name:
+    excluded:
+        - id
+        - URL

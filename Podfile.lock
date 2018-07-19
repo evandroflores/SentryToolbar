@@ -1,12 +1,16 @@
 PODS:
-  - Signals (5.0.0)
+  - SwiftLint (0.25.0)
 
 DEPENDENCIES:
-  - Signals (~> 5.0)
+  - SwiftLint
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SwiftLint
 
 SPEC CHECKSUMS:
-  Signals: 6c41253cc172e4251d6064341bbc555a589c8d9f
+  SwiftLint: e14651157288e9e01d6e1a71db7014fb5744a8ea
 
-PODFILE CHECKSUM: db7f3b41947da30adee775b821250270eec3886e
+PODFILE CHECKSUM: 354ebd06e4de35d2f63366f0e5d14b8eb84d3cf1
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3
