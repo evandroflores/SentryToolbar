@@ -25,4 +25,12 @@ struct Issue: Codable {
         decoder.dateDecodingStrategy = .formatted(dateFormat)
         return decoder
     }
+
+    func toNotification() -> [String: Any] {
+        return [
+            "type": self.firstSeen == self.lastSeen ?
+                NotificationHandler.newIssueLabel:
+                NotificationHandler.newEventCountLabel,
+            "issue": self]
+    }
 }

@@ -48,13 +48,8 @@ struct Filter: Codable {
         for issue in issues! {
             let diff = issue.lastSeen.timeIntervalSince(lastRun)
             if diff > 0 {
-                var notificationData: [String: Any]
-                notificationData = [
-                    "type": issue.firstSeen == issue.lastSeen ? NotificationHandler.newIssueLabel:
-                        NotificationHandler.newEventCountLabel,
-                    "issue": issue]
                 NotificationCenter.default.post(name: Notification.Name(NotificationHandler.notificationSig),
-                                                object: nil, userInfo: notificationData)
+                                                object: nil, userInfo: issue.toNotification())
             }
         }
     }
