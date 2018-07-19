@@ -12,28 +12,41 @@ Edit the config file to add your Sentry token, Organizationi slug, Project slug.
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>organizations</key>
+    <key>filters</key>
     <dict>
-        <key>your_org_slug</key>
+        <key>FilterA</key>
         <dict>
-            <key>projects</key>
-            <dict>
-                <key>your_project_slug</key>
-                <dict>
-                    <key>issues</key>
-                    <array/>
-                    <key>query</key>
-                    <string>is:unresolved</string>
-                    <key>slug</key>
-                    <string>your_project_slug</string>
-                </dict>
-            </dict>
-            <key>slug</key>
-            <string>your_org_slug</string>
-            <key>token</key>
-            <string>YOUR TOKEN HERE</string>
+            <key>isActive</key>
+            <true/>
+            <key>issues</key>
+            <array/>
+            <key>name</key>
+            <string>FilterA</string>
+            <key>organizationSlug</key>
+            <string>myorganization</string>
+            <key>projectSlug</key>
+            <string>myproject</string>
+            <key>query</key>
+            <string>is:unresolved</string>
+        </dict>
+        <key>FilterB</key>
+        <dict>
+            <key>isActive</key>
+            <true/>
+            <key>issues</key>
+            <array/>
+            <key>name</key>
+            <string>FilterB</string>
+            <key>organizationSlug</key>
+            <string>myorganization</string>
+            <key>projectSlug</key>
+            <string>myotherproject</string>
+            <key>query</key>
+            <string>is:unresolved</string>
         </dict>
     </dict>
+    <key>token</key>
+    <string>YOUR TOKEN</string>
 </dict>
 </plist>
 ```

@@ -3,5 +3,5 @@
 target 'SentryToolbar' do
   use_frameworks!
 
-  pod 'Signals', '~> 5.0'
+  pod 'SwiftLint'
 end

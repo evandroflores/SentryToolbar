@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Issue : Codable {
+struct Issue: Codable {
     let id: String
     let title: String
     let count: String
@@ -20,9 +20,17 @@ struct Issue : Codable {
     static func decoder() -> JSONDecoder {
         let decoder = JSONDecoder()
         let dateFormat = DateFormatter()
-        dateFormat.timeZone = TimeZone(identifier:"GMT")
+        dateFormat.timeZone = TimeZone(identifier: "GMT")
         dateFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z"
         decoder.dateDecodingStrategy = .formatted(dateFormat)
         return decoder
+    }
+
+    func toNotification() -> [String: Any] {
+        return [
+            "type": self.firstSeen == self.lastSeen ?
+                NotificationHandler.newIssueLabel:
+                NotificationHandler.newEventCountLabel,
+            "issue": self]
     }
 }

@@ -9,12 +9,23 @@
 import Foundation
 
 class SentryAPI {
-    func fetchIssues(org: Organization, proj: Project){
-        let (url, token) = Config.configInstance.getIssueEndpoint(organization: org, project: proj)
+    static let apiBaseUrl = "https://sentry.io/api/0"
+    static let issuesEndpoint = "/projects/%@/%@/issues/"
+    static let timeoutInterval = 10.0
 
+    func getIssueEndpoint(filter: Filter) -> URL {
+        return URL(string:
+            "\(SentryAPI.apiBaseUrl)" +
+            "\(String(format: SentryAPI.issuesEndpoint, filter.organizationSlug, filter.projectSlug))" +
+            "\(getQueryParam(query: filter.query))")!
+    }
+
+    func fetchIssues(filter: Filter) {
+        let url = getIssueEndpoint(filter: filter)
+        let token = Config.configInstance.token
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.timeoutInterval = Config.API_TIMEOUT
+        request.timeoutInterval = SentryAPI.timeoutInterval
         request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -27,7 +38,7 @@ class SentryAPI {
                 switch httpResponse.statusCode {
                 case 200:
                     if data != nil {
-                        self.parseIssues(org: org, proj: proj, data: data!)
+                        self.parseIssues(filter: filter, data: data!)
                     } else {
                         NSLog("Did not receive data for: URL[\(url)] Token[\(token)]")
                         return
@@ -36,24 +47,37 @@ class SentryAPI {
                 case 401:
                     NSLog("Unauthorized access for: URL[\(url)] Token[\(token)]")
                 default:
-                    NSLog("API Response[\(httpResponse.statusCode)] for: URL[\(url)] Token[\(token)] Error[\(HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode))]")
+                    NSLog("API Response[\(httpResponse.statusCode)] for: " +
+                          "URL[\(url)] Token[\(token)] " +
+                          "Error[\(HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode))]")
                 }
             }
         }
         task.resume()
     }
 
-    func parseIssues(org: Organization, proj: Project, data: Data){
+    func parseIssues(filter: Filter, data: Data) {
         do {
             let decoder = Issue.decoder()
             let issues = try decoder.decode([Issue].self, from: data)
-            Config.configInstance.organizations[org.slug]?.projects[proj.slug]?.updateIssues(newIssues: issues)
+            Config.configInstance.filters[filter.name]?.updateIssues(newIssues: issues)
 
-            NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.UpdateCountSig), object: nil, userInfo: nil)
+            NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.updateCountSig),
+                                            object: nil,
+                                            userInfo: nil)
 
         } catch {
             let rawData = String(data: data, encoding: .utf8)
-            NSLog("Error trying to parse Json Org[\(org.slug)] Proj[\(proj.slug)] Error[\(error)] RawData[\(rawData ?? "Empty Data")]")
+            NSLog("Error trying to parse Json Filter[\(filter.name)] " +
+                  "Error[\(error)] RawData[\(rawData ?? "Empty Data")]")
+        }
+    }
+
+    func getQueryParam(query: String) -> String {
+        if query.isEmpty {
+            return ""
+        } else {
+            return "?query=\(query)"
         }
     }
 }

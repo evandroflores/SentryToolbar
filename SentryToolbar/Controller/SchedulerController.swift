@@ -13,36 +13,40 @@ class SchedulerController: NSObject {
     var sentryApi: SentryAPI
     var timer: Timer!
 
-    override init(){
+    override init() {
         NSLog("SchedulerController.init")
         conf = Config.configInstance
         sentryApi = SentryAPI()
         super.init()
-        timer = Timer.scheduledTimer(timeInterval: Config.LOOP_CYCLE_SECONDS, target: self, selector: #selector(loop), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: Config.loopCycleSeconds,
+                                     target: self,
+                                     selector: #selector(loop),
+                                     userInfo: nil,
+                                     repeats: true)
     }
 
-    @objc func loop(){
-        for (_, org) in conf.organizations {
-            NSLog("SchedulerController.loop Organization [\(org.slug)]")
-            for (_, proj) in org.projects {
-                NSLog("SchedulerController.loop Organization [\(org.slug)] Project [\(proj.slug)] Query [\(proj.query)]")
+    @objc func loop() {
+        for (_, filter) in conf.filters {
+            NSLog("SchedulerController.loop Filter [\(filter.name)] " +
+                  "-> Organization [\(filter.organizationSlug)] " +
+                  "Project [\(filter.projectSlug)] " +
+                  "Query [\(filter.query)]")
 
-                DispatchQueue.global(qos: DispatchQoS.background.qosClass).async {
-                    self.sentryApi.fetchIssues(org: org, proj: proj)
-                }
+            DispatchQueue.global(qos: DispatchQoS.background.qosClass).async {
+                self.sentryApi.fetchIssues(filter: filter)
             }
         }
     }
 
-    func start(){
+    func start() {
         timer.fire()
     }
 
-    func updateTotal(){
+    func updateTotal() {
         NSLog("SchedulerController.update")
     }
 
-    func stop(){
+    func stop() {
         NSLog("SchedulerController.stop")
         timer.invalidate()
     }
