@@ -20,7 +20,6 @@
 		34D642FA1F89781400AC2810 /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D642F91F89781400AC2810 /* StatusMenuController.swift */; };
 		34D642FC1F89867B00AC2810 /* SentryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D642FB1F89867B00AC2810 /* SentryAPI.swift */; };
 		34F0FC921FA4D16600BC33BC /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F0FC911FA4D16600BC33BC /* Config.swift */; };
-		831EA7A7CA567E055A07F91D /* Pods_SentryToolbar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4691704D9D1CC1D3DD0C2D1F /* Pods_SentryToolbar.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +39,6 @@
 		34D642F91F89781400AC2810 /* StatusMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
 		34D642FB1F89867B00AC2810 /* SentryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryAPI.swift; sourceTree = "<group>"; };
 		34F0FC911FA4D16600BC33BC /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		4691704D9D1CC1D3DD0C2D1F /* Pods_SentryToolbar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SentryToolbar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B7606C96BEAB85B3BC5CC71 /* Pods-SentryToolbar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SentryToolbar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SentryToolbar/Pods-SentryToolbar.debug.xcconfig"; sourceTree = "<group>"; };
 		A73D080C597C3A7F55F11635 /* Pods-SentryToolbar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SentryToolbar.release.xcconfig"; path = "Pods/Target Support Files/Pods-SentryToolbar/Pods-SentryToolbar.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -50,7 +48,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				831EA7A7CA567E055A07F91D /* Pods_SentryToolbar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +138,6 @@
 		5C55E0D204DC7E223AD8A58A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4691704D9D1CC1D3DD0C2D1F /* Pods_SentryToolbar.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
