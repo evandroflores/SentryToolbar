@@ -16,7 +16,8 @@ struct Filter: Codable {
     var isActive: Bool = true
     var issues: [Issue]?
 
-    init(name: String, organizationSlug: String, projectSlug: String, query: String = "is:unresolved", isActive: Bool = true) {
+    init(name: String, organizationSlug: String, projectSlug: String,
+         query: String = "is:unresolved", isActive: Bool = true) {
         self.name = name
         self.organizationSlug = organizationSlug
         self.projectSlug = projectSlug
@@ -31,7 +32,9 @@ struct Filter: Codable {
                 totalEvents += Int64(issue.count)!
             }
         }
-        NSLog("Filter.getEventSum - Filter [\(self.name)] Issues [\(self.issues?.count ?? 0)] EventSum [\(totalEvents)]")
+        NSLog("Filter.getEventSum - Filter [\(self.name)] " +
+              "Issues [\(self.issues?.count ?? 0)] " +
+              "EventSum [\(totalEvents)]")
         return totalEvents
     }
 
@@ -47,9 +50,11 @@ struct Filter: Codable {
             if diff > 0 {
                 var notificationData: [String: Any]
                 notificationData = [
-                    "type": issue.firstSeen == issue.lastSeen ? NotificationHandler.newIssueLabel:  NotificationHandler.newEventCountLabel,
+                    "type": issue.firstSeen == issue.lastSeen ? NotificationHandler.newIssueLabel:
+                        NotificationHandler.newEventCountLabel,
                     "issue": issue]
-                NotificationCenter.default.post(name: Notification.Name(NotificationHandler.notificationSig), object: nil, userInfo: notificationData)
+                NotificationCenter.default.post(name: Notification.Name(NotificationHandler.notificationSig),
+                                                object: nil, userInfo: notificationData)
             }
         }
     }

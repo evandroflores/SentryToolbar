@@ -40,7 +40,7 @@ struct Config: Codable {
             NSLog("Config.loadConfig - File [\(Config.configFile)] does not exists. Creating a sample...")
             Config.createDefaultConfig()
         }
-        
+
         var config: Config
         var data: Data
         do {
@@ -62,7 +62,8 @@ struct Config: Codable {
             let data = try encoder.encode(config)
             try data.write(to: URL(string: "file://\(Config.configFile)")!)
         } catch {
-            NSLog("Config.createDefaultConfig - Fail to write default config: \(Config.configFile): \(error.localizedDescription)")
+            NSLog("Config.createDefaultConfig - Fail to write default config: \(Config.configFile): " +
+                  "\(error.localizedDescription)")
         }
     }
 }

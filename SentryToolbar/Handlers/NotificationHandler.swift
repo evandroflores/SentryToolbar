@@ -16,7 +16,10 @@ class NotificationHandler: NSObject, NSUserNotificationCenterDelegate {
 
     override init() {
         super.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.showNotification(notification:)), name: Notification.Name(NotificationHandler.notificationSig), object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.showNotification(notification:)),
+                                               name: Notification.Name(NotificationHandler.notificationSig),
+                                               object: nil)
     }
 
     @objc func showNotification(notification: NSNotification) {
@@ -26,7 +29,8 @@ class NotificationHandler: NSObject, NSUserNotificationCenterDelegate {
         let userNotification = NSUserNotification()
         userNotification.title = notificationType ?? NotificationHandler.newEventCountLabel
         userNotification.subtitle = issue?.title ?? "Issue"
-        userNotification.informativeText = "\(issue?.count ?? "-") Events \( String(describing: issue!.userCount) ) Users"
+        userNotification.informativeText = "\(issue?.count ?? "-") " +
+                                           "Events \( String(describing: issue!.userCount) ) Users"
         userNotification.soundName = NSUserNotificationDefaultSoundName
         userNotification.hasActionButton = false
         userNotification.userInfo = ["permalink": issue?.permalink ?? "https://sentry.io"]
@@ -35,7 +39,8 @@ class NotificationHandler: NSObject, NSUserNotificationCenterDelegate {
         NSUserNotificationCenter.default.deliver(userNotification)
     }
 
-    public func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
+    public func userNotificationCenter(_ center: NSUserNotificationCenter,
+                                       didActivate notification: NSUserNotification) {
         let permalink = notification.userInfo?["permalink"] as! String
 
         let url = URL(string: permalink)
@@ -44,12 +49,13 @@ class NotificationHandler: NSObject, NSUserNotificationCenterDelegate {
 
     // Overwriting setupUserNotificationCenter forcing to show messages when active
     private func setupUserNotificationCenter() {
-        let nc = NSUserNotificationCenter.default
-        nc.delegate = self
+        let notificationCenter = NSUserNotificationCenter.default
+        notificationCenter.delegate = self
     }
 
     // Overwriting userNotificationCenter forcing to show messages when ative
-    public func userNotificationCenter(_ center: NSUserNotificationCenter, shouldPresent notification: NSUserNotification) -> Bool {
+    public func userNotificationCenter(_ center: NSUserNotificationCenter,
+                                       shouldPresent notification: NSUserNotification) -> Bool {
         return true
     }
 }

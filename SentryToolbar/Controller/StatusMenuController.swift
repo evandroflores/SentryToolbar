@@ -22,7 +22,10 @@ class StatusMenuController: NSObject {
         statusItem.menu = statusMenu
         statusItem.title = ""
 
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateTitle(notification:)), name: Notification.Name(IssueCountHandler.updateCountSig), object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.updateTitle(notification:)),
+                                               name: Notification.Name(IssueCountHandler.updateCountSig),
+                                               object: nil)
     }
     @objc func updateTitle(notification: NSNotification) {
         DispatchQueue.main.async {

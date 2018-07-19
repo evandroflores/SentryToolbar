@@ -19,7 +19,8 @@ class IssueCountHandler: NSObject {
 
     override init() {
         super.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateCount(notification:)), name: Notification.Name(IssueCountHandler.updateCountSig), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateCount(notification:)),
+                                               name: Notification.Name(IssueCountHandler.updateCountSig), object: nil)
     }
 
     @objc func updateCount(notification: NSNotification) {

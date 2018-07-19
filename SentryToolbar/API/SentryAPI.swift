@@ -47,7 +47,9 @@ class SentryAPI {
                 case 401:
                     NSLog("Unauthorized access for: URL[\(url)] Token[\(token)]")
                 default:
-                    NSLog("API Response[\(httpResponse.statusCode)] for: URL[\(url)] Token[\(token)] Error[\(HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode))]")
+                    NSLog("API Response[\(httpResponse.statusCode)] for: " +
+                          "URL[\(url)] Token[\(token)] " +
+                          "Error[\(HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode))]")
                 }
             }
         }
@@ -60,11 +62,14 @@ class SentryAPI {
             let issues = try decoder.decode([Issue].self, from: data)
             Config.configInstance.filters[filter.name]?.updateIssues(newIssues: issues)
 
-            NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.updateCountSig), object: nil, userInfo: nil)
+            NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.updateCountSig),
+                                            object: nil,
+                                            userInfo: nil)
 
         } catch {
             let rawData = String(data: data, encoding: .utf8)
-            NSLog("Error trying to parse Json Filter[\(filter.name)] Error[\(error)] RawData[\(rawData ?? "Empty Data")]")
+            NSLog("Error trying to parse Json Filter[\(filter.name)] " +
+                  "Error[\(error)] RawData[\(rawData ?? "Empty Data")]")
         }
     }
 
