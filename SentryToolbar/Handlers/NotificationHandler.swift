@@ -41,9 +41,9 @@ class NotificationHandler: NSObject, NSUserNotificationCenterDelegate {
 
     public func userNotificationCenter(_ center: NSUserNotificationCenter,
                                        didActivate notification: NSUserNotification) {
-        let permalink = notification.userInfo?["permalink"] as! String
+        let permalink = notification.userInfo!["permalink"]
 
-        let url = URL(string: permalink)
+        let url = URL(string: (permalink as? String)!)
         NSWorkspace.shared.open(url!)
     }
 
