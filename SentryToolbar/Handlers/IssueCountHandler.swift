@@ -27,7 +27,7 @@ class IssueCountHandler: NSObject {
         NSLog("IssueCountHandler.updateCount")
         var total = Int64(0)
 
-        for (_, filter) in Config.configInstance.filters {
+        for (_, filter) in Config.getActiveFilters() {
             total += filter.getEventSum()
         }
 

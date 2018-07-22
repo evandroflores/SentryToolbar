@@ -9,13 +9,11 @@
 import Foundation
 
 class SchedulerController: NSObject {
-    var conf: Config
     var sentryApi: SentryAPI
     var timer: Timer!
 
     override init() {
         NSLog("SchedulerController.init")
-        conf = Config.configInstance
         sentryApi = SentryAPI()
         super.init()
         timer = Timer.scheduledTimer(timeInterval: Config.loopCycleSeconds,
@@ -26,7 +24,7 @@ class SchedulerController: NSObject {
     }
 
     @objc func loop() {
-        for (_, filter) in conf.filters {
+        for (_, filter) in Config.getActiveFilters() {
             NSLog("SchedulerController.loop Filter [\(filter.name)] " +
                   "-> Organization [\(filter.organizationSlug)] " +
                   "Project [\(filter.projectSlug)] " +

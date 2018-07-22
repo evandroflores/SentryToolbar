@@ -66,4 +66,7 @@ struct Config: Codable {
                   "\(error.localizedDescription)")
         }
     }
+    static func getActiveFilters() -> [String: Filter] {
+        return Config.configInstance.filters.filter({$0.1.isActive == true})
+    }
 }
