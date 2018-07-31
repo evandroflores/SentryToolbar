@@ -47,6 +47,8 @@ Edit the config file to add your Sentry token, Organizationi slug, Project slug.
     </dict>
     <key>token</key>
     <string>YOUR TOKEN</string>
+    <key>betaMode</key>
+    <false/>
 </dict>
 </plist>
 ```

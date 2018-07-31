@@ -25,6 +25,14 @@ struct Filter: Codable {
         self.issues = []
     }
 
+    enum CodingKeys: String, CodingKey {
+        case name
+        case organizationSlug
+        case projectSlug
+        case query
+        case isActive
+    }
+
     func getEventSum() -> Int64 {
         var totalEvents = Int64(0)
         if self.issues != nil {
