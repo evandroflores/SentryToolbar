@@ -11,11 +11,6 @@ import Cocoa
 class PreferencesWindow: NSWindowController {
 
     @IBOutlet weak var token: NSTextField!
-    @IBAction func tokenHelpClicked(_ sender: Any) {
-        if let url = URL(string: "https://sentry.io/settings/account/api/auth-tokens/"),
-            NSWorkspace.shared.open(url) {
-        }
-    }
 
     override func showWindow(_ sender: Any?) {
         super.showWindow(sender)
@@ -24,13 +19,12 @@ class PreferencesWindow: NSWindowController {
         NSApp.activate(ignoringOtherApps: true)
         coverNonBeta()
 
+        self.token.stringValue = Config.configInstance.token
     }
 
     override func windowDidLoad() {
         super.windowDidLoad()
 
-        self.token.stringValue = Config.configInstance.token
-        
         self.window?.makeFirstResponder(self)
     }
 
@@ -44,7 +38,19 @@ class PreferencesWindow: NSWindowController {
 
             ~/Library/Containers/br.com.eof.SentryToolbar/Data/.SentryToolbar.plist
             """
-            self.window?.contentView?.addSubview(nonBetaText)
+        self.window?.contentView?.addSubview(nonBetaText)
         }
     }
+
+    @IBAction func tokenHelpClicked(_ sender: Any) {
+        if let url = URL(string: "https://sentry.io/settings/account/api/auth-tokens/"),
+            NSWorkspace.shared.open(url) {
+        }
+    }
+
+    @IBAction func saveClicked(_ sender: Any) {
+        Config.configInstance.token = token.stringValue
+        Config.save()
+    }
+
 }
