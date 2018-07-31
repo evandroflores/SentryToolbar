@@ -10,6 +10,7 @@ import Cocoa
 
 class PreferencesWindow: NSWindowController {
 
+    @IBOutlet weak var token: NSTextField!
     @IBAction func tokenHelpClicked(_ sender: Any) {
         if let url = URL(string: "https://sentry.io/settings/account/api/auth-tokens/"),
             NSWorkspace.shared.open(url) {
@@ -23,6 +24,14 @@ class PreferencesWindow: NSWindowController {
         NSApp.activate(ignoringOtherApps: true)
         coverNonBeta()
 
+    }
+
+    override func windowDidLoad() {
+        super.windowDidLoad()
+
+        self.token.stringValue = Config.configInstance.token
+        
+        self.window?.makeFirstResponder(self)
     }
 
     func coverNonBeta() {
