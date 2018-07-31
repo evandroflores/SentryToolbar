@@ -13,7 +13,9 @@ struct Config: Codable {
     // ~/Library/Containers/br.com.eof.SentryToolbar/Data/.SentryToolbar.plist
     static let configFile = "\(NSHomeDirectory())/.SentryToolbar.plist"
     static let loopCycleSeconds = 60.0
+    var betaMode = false
     static var configInstance: Config = loadConfig()
+
     var token: String
     var filters: [String: Filter]
     init() {
