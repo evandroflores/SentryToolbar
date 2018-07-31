@@ -10,6 +10,12 @@ import Cocoa
 
 class PreferencesWindow: NSWindowController {
 
+    @IBAction func tokenHelpClicked(_ sender: Any) {
+        if let url = URL(string: "https://sentry.io/settings/account/api/auth-tokens/"),
+            NSWorkspace.shared.open(url) {
+        }
+    }
+
     override func showWindow(_ sender: Any?) {
         super.showWindow(sender)
         self.window?.center()
