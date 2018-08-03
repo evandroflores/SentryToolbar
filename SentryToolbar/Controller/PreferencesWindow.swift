@@ -11,6 +11,7 @@ import Cocoa
 class PreferencesWindow: NSWindowController {
 
     @IBOutlet weak var token: NSTextField!
+    @IBOutlet weak var tokenCheckButton: NSButton!
 
     override func showWindow(_ sender: Any?) {
         super.showWindow(sender)
@@ -26,6 +27,7 @@ class PreferencesWindow: NSWindowController {
         super.windowDidLoad()
 
         self.window?.makeFirstResponder(self)
+        self.token.focusRingType = NSFocusRingType.none
     }
 
     func coverNonBeta() {
@@ -45,6 +47,28 @@ class PreferencesWindow: NSWindowController {
     @IBAction func tokenHelpClicked(_ sender: Any) {
         if let url = URL(string: "https://sentry.io/settings/account/api/auth-tokens/"),
             NSWorkspace.shared.open(url) {
+        }
+    }
+
+    @IBAction func tokenCheckClicked(_ sender: Any) {
+        SentryAPI.isTokenValid(token: token.stringValue, withHandler: handleTokenValidation)
+    }
+
+    func handleTokenValidation(httpStatus: Int) {
+        NSLog("handleTokenValidation \(httpStatus)")
+        var statusColor: NSColor
+
+        if httpStatus == 200 {
+            statusColor = NSColor(red: 0.161, green: 0.807, blue: 0.260, alpha: 0.75)
+        } else {
+            statusColor = NSColor(red: 0.998, green: 0.375, blue: 0.347, alpha: 0.75)
+        }
+
+        DispatchQueue.main.async {
+            self.token.wantsLayer = true
+            self.token.layer?.borderWidth = 2.0
+            self.token.layer?.cornerRadius = 3.0
+            self.token.layer?.borderColor = statusColor.cgColor
         }
     }
 
