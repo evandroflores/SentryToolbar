@@ -12,9 +12,12 @@ class PreferencesWindow: NSWindowController {
 
     @IBOutlet weak var token: NSTextField!
     @IBOutlet weak var tokenCheckButton: NSButton!
-    @IBOutlet weak var showIssueCount: NSButton!
-    @IBOutlet weak var showEventCount: NSButton!
-    @IBOutlet weak var showCountTrend: NSButton!
+    @IBOutlet weak var showIssueCountCheck: NSButton!
+    @IBOutlet weak var showEventCountCheck: NSButton!
+    @IBOutlet weak var showCountTrendCheck: NSButton!
+    @IBOutlet weak var notifyNewIssueCheck: NSButton!
+    @IBOutlet weak var notifyNewCountCheck: NSButton!
+
     override func showWindow(_ sender: Any?) {
         super.showWindow(sender)
         self.window?.center()
@@ -23,9 +26,12 @@ class PreferencesWindow: NSWindowController {
         coverNonBeta()
 
         self.token.stringValue = Config.configInstance.token
-        self.showIssueCount.state = self.getState(shouldBeOn: Config.configInstance.showIssueCount)
-        self.showEventCount.state = self.getState(shouldBeOn: Config.configInstance.showEventCount)
-        self.showCountTrend.state = self.getState(shouldBeOn: Config.configInstance.showCountTrend)
+        self.showIssueCountCheck.state = self.getState(shouldBeOn: Config.configInstance.showIssueCount)
+        self.showEventCountCheck.state = self.getState(shouldBeOn: Config.configInstance.showEventCount)
+        self.showCountTrendCheck.state = self.getState(shouldBeOn: Config.configInstance.showCountTrend)
+
+        self.notifyNewIssueCheck.state = self.getState(shouldBeOn: Config.configInstance.notifyNewIssue)
+        self.notifyNewCountCheck.state = self.getState(shouldBeOn: Config.configInstance.notifyNewCount)
     }
 
     private func getState(shouldBeOn: Bool) -> NSControl.StateValue {
@@ -81,11 +87,20 @@ class PreferencesWindow: NSWindowController {
         }
     }
 
-    @IBAction func saveClicked(_ sender: Any) {
+    @IBAction func saveClicked(_ sender: Any) { self.save() }
+    @IBAction func showIssueCountClicked(_ sender: Any) { self.save() }
+    @IBAction func showEventCountClicked(_ sender: Any) { self.save() }
+    @IBAction func showCountTrendClicked(_ sender: Any) { self.save() }
+    @IBAction func notifyNewIssueClicked(_ sender: Any) { self.save() }
+    @IBAction func notifyNewCountClicked(_ sender: Any) { self.save() }
+
+    func save() {
         Config.configInstance.token = self.token.stringValue
-        Config.configInstance.showIssueCount = self.showIssueCount.state.rawValue == 1
-        Config.configInstance.showEventCount = self.showEventCount.state.rawValue == 1
-        Config.configInstance.showCountTrend = self.showCountTrend.state.rawValue == 1
+        Config.configInstance.showIssueCount = self.showIssueCountCheck.state.rawValue == 1
+        Config.configInstance.showEventCount = self.showEventCountCheck.state.rawValue == 1
+        Config.configInstance.showCountTrend = self.showCountTrendCheck.state.rawValue == 1
+        Config.configInstance.notifyNewIssue = self.notifyNewIssueCheck.state.rawValue == 1
+        Config.configInstance.notifyNewCount = self.notifyNewCountCheck.state.rawValue == 1
         Config.save()
         NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.updateCountSig),
                                         object: nil,

@@ -8,9 +8,11 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PreferencesWindow" customModule="SentryToolbar" customModuleProvider="target">
             <connections>
-                <outlet property="showCountTrend" destination="Lig-2N-EcD" id="YXj-JP-D66"/>
-                <outlet property="showEventCount" destination="Ldu-yc-Rwd" id="6Qy-xt-EQZ"/>
-                <outlet property="showIssueCount" destination="b2a-5L-xyV" id="bJG-nJ-IiW"/>
+                <outlet property="notifyNewCountCheck" destination="dMh-2C-g9w" id="Vsp-SM-eng"/>
+                <outlet property="notifyNewIssueCheck" destination="7Za-7r-V21" id="MMF-Zq-raA"/>
+                <outlet property="showCountTrendCheck" destination="Lig-2N-EcD" id="YXj-JP-D66"/>
+                <outlet property="showEventCountCheck" destination="Ldu-yc-Rwd" id="6Qy-xt-EQZ"/>
+                <outlet property="showIssueCountCheck" destination="b2a-5L-xyV" id="bJG-nJ-IiW"/>
                 <outlet property="token" destination="ZwA-tT-ED6" id="hbx-vV-eFc"/>
                 <outlet property="tokenCheckButton" destination="idQ-XQ-bEH" id="6xX-lQ-Quh"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
@@ -30,18 +32,18 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8RY-xf-yQ8">
-                        <rect key="frame" x="437" y="189" width="25" height="25"/>
+                        <rect key="frame" x="445" y="177" width="25" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qPA-Zx-gAX">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
-                            <connections>
-                                <action selector="tokenHelpClicked:" target="-2" id="A4t-nC-bqI"/>
-                            </connections>
                         </buttonCell>
+                        <connections>
+                            <action selector="tokenHelpClicked:" target="-2" id="J2t-te-ovW"/>
+                        </connections>
                     </button>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZwA-tT-ED6">
-                        <rect key="frame" x="82" y="192" width="345" height="22"/>
+                        <rect key="frame" x="20" y="179" width="425" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" usesSingleLineMode="YES" bezelStyle="round" id="rrO-gh-RzX">
                             <font key="font" metaFont="smallSystem"/>
@@ -50,9 +52,27 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EWc-fI-RpZ">
-                        <rect key="frame" x="18" y="196" width="58" height="13"/>
+                        <rect key="frame" x="18" y="209" width="58" height="13"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Auth Token" id="wfW-4c-O7v">
+                            <font key="font" metaFont="label"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EyJ-hO-a1e">
+                        <rect key="frame" x="43" y="145" width="26" height="13"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Title" id="ET4-D3-Xvy">
+                            <font key="font" metaFont="label"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="plQ-mJ-zmj">
+                        <rect key="frame" x="276" y="145" width="60" height="13"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Notification" id="Hoh-1Y-Bf9">
                             <font key="font" metaFont="label"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -66,11 +86,11 @@
                             <font key="font" metaFont="smallSystem"/>
                         </buttonCell>
                         <connections>
-                            <action selector="saveClicked:" target="-2" id="3ye-8J-7O4"/>
+                            <action selector="saveClicked:" target="-2" id="TKs-ig-tdt"/>
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="idQ-XQ-bEH">
-                        <rect key="frame" x="374" y="194" width="50" height="17"/>
+                        <rect key="frame" x="391" y="181" width="50" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <backgroundFilters>
                             <ciFilter name="CIMaskToAlpha">
@@ -84,32 +104,63 @@
                             <font key="font" metaFont="smallSystem"/>
                         </buttonCell>
                         <connections>
-                            <action selector="tokenCheckClicked:" target="-2" id="aru-Zj-3yA"/>
+                            <action selector="tokenCheckClicked:" target="-2" id="xYP-0c-nCX"/>
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b2a-5L-xyV">
-                        <rect key="frame" x="51" y="139" width="109" height="18"/>
+                        <rect key="frame" x="43" y="114" width="109" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Show Issue Count" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="KEe-9D-0fA">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="label"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="showIssueCountClicked:" target="-2" id="ehO-3F-hKf"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Za-7r-V21">
+                        <rect key="frame" x="282" y="114" width="104" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Notify New Issue" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="HK0-my-ark">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="label"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="notifyNewIssueClicked:" target="-2" id="qmc-uP-JDn"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dMh-2C-g9w">
+                        <rect key="frame" x="282" y="90" width="108" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Notify New Count" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="And-qe-bMC">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="label"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="notifyNewCountClicked:" target="-2" id="P0v-oJ-cRl"/>
+                        </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ldu-yc-Rwd">
-                        <rect key="frame" x="185" y="139" width="111" height="18"/>
+                        <rect key="frame" x="43" y="90" width="111" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Show Event Count" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="e0r-ay-6Un">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="label"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="showEventCountClicked:" target="-2" id="hYR-pu-ac9"/>
+                        </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lig-2N-EcD">
-                        <rect key="frame" x="318" y="139" width="111" height="18"/>
+                        <rect key="frame" x="43" y="64" width="111" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Show Count Trend" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="dH0-Y8-9JB">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="label"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="showCountTrendClicked:" target="-2" id="8UY-70-yNl"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>
