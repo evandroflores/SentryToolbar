@@ -8,7 +8,11 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PreferencesWindow" customModule="SentryToolbar" customModuleProvider="target">
             <connections>
+                <outlet property="showCountTrend" destination="Lig-2N-EcD" id="YXj-JP-D66"/>
+                <outlet property="showEventCount" destination="Ldu-yc-Rwd" id="6Qy-xt-EQZ"/>
+                <outlet property="showIssueCount" destination="b2a-5L-xyV" id="bJG-nJ-IiW"/>
                 <outlet property="token" destination="ZwA-tT-ED6" id="hbx-vV-eFc"/>
+                <outlet property="tokenCheckButton" destination="idQ-XQ-bEH" id="6xX-lQ-Quh"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -37,33 +41,75 @@
                         </buttonCell>
                     </button>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZwA-tT-ED6">
-                        <rect key="frame" x="96" y="192" width="335" height="22"/>
+                        <rect key="frame" x="82" y="192" width="345" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="rrO-gh-RzX">
-                            <font key="font" metaFont="system"/>
+                        <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" usesSingleLineMode="YES" bezelStyle="round" id="rrO-gh-RzX">
+                            <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EWc-fI-RpZ">
-                        <rect key="frame" x="18" y="194" width="72" height="17"/>
+                        <rect key="frame" x="18" y="196" width="58" height="13"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Auth Token" id="wfW-4c-O7v">
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="label"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ncg-WK-8ln">
-                        <rect key="frame" x="219" y="18" width="42" height="25"/>
+                        <rect key="frame" x="201" y="18" width="79" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="roundTextured" title="save" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dHV-kW-DMx">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="smallSystem"/>
                         </buttonCell>
                         <connections>
                             <action selector="saveClicked:" target="-2" id="3ye-8J-7O4"/>
                         </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="idQ-XQ-bEH">
+                        <rect key="frame" x="374" y="194" width="50" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <backgroundFilters>
+                            <ciFilter name="CIMaskToAlpha">
+                                <configuration>
+                                    <null key="inputImage"/>
+                                </configuration>
+                            </ciFilter>
+                        </backgroundFilters>
+                        <buttonCell key="cell" type="inline" title="check" bezelStyle="inline" alignment="center" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" state="on" borderStyle="border" inset="2" id="d1l-HH-jFX">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="tokenCheckClicked:" target="-2" id="aru-Zj-3yA"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b2a-5L-xyV">
+                        <rect key="frame" x="51" y="139" width="109" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Show Issue Count" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="KEe-9D-0fA">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="label"/>
+                        </buttonCell>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ldu-yc-Rwd">
+                        <rect key="frame" x="185" y="139" width="111" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Show Event Count" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="e0r-ay-6Un">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="label"/>
+                        </buttonCell>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lig-2N-EcD">
+                        <rect key="frame" x="318" y="139" width="111" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Show Count Trend" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="dH0-Y8-9JB">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="label"/>
+                        </buttonCell>
                     </button>
                 </subviews>
             </view>

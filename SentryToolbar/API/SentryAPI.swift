@@ -9,8 +9,8 @@
 import Foundation
 
 class SentryAPI {
-    static let apiBaseUrl = "https://sentry.io/api/0"
-    static let issuesEndpoint = "/projects/%@/%@/issues/"
+    static let apiBaseUrl = "https://sentry.io/api/0/"
+    static let issuesEndpoint = "projects/%@/%@/issues/"
     static let timeoutInterval = 10.0
 
     func getIssueEndpoint(filter: Filter) -> URL {
@@ -79,5 +79,26 @@ class SentryAPI {
         } else {
             return "?query=\(query)"
         }
+    }
+
+    static func isTokenValid(token: String, withHandler: @escaping (Int) -> Void) {
+        NSLog("About to validate token \(token)")
+
+        var request = URLRequest(url: URL(string: SentryAPI.apiBaseUrl)!)
+        request.httpMethod = "GET"
+        request.timeoutInterval = SentryAPI.timeoutInterval
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
+        let task = URLSession.shared.dataTask(with: request) { _, response, error in
+            guard error == nil else {
+                NSLog("Fail to validate Token \(String(describing: error))")
+                withHandler(500)
+                return
+            }
+            if let httpResponse = response as? HTTPURLResponse {
+                withHandler(httpResponse.statusCode)
+            }
+        }
+        task.resume()
     }
 }

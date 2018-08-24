@@ -11,7 +11,10 @@ import Cocoa
 class PreferencesWindow: NSWindowController {
 
     @IBOutlet weak var token: NSTextField!
-
+    @IBOutlet weak var tokenCheckButton: NSButton!
+    @IBOutlet weak var showIssueCount: NSButton!
+    @IBOutlet weak var showEventCount: NSButton!
+    @IBOutlet weak var showCountTrend: NSButton!
     override func showWindow(_ sender: Any?) {
         super.showWindow(sender)
         self.window?.center()
@@ -20,12 +23,20 @@ class PreferencesWindow: NSWindowController {
         coverNonBeta()
 
         self.token.stringValue = Config.configInstance.token
+        self.showIssueCount.state = self.getState(shouldBeOn: Config.configInstance.showIssueCount)
+        self.showEventCount.state = self.getState(shouldBeOn: Config.configInstance.showEventCount)
+        self.showCountTrend.state = self.getState(shouldBeOn: Config.configInstance.showCountTrend)
+    }
+
+    private func getState(shouldBeOn: Bool) -> NSControl.StateValue {
+        return shouldBeOn ? NSControl.StateValue.on : NSControl.StateValue.off
     }
 
     override func windowDidLoad() {
         super.windowDidLoad()
 
         self.window?.makeFirstResponder(self)
+        self.token.focusRingType = NSFocusRingType.none
     }
 
     func coverNonBeta() {
@@ -48,9 +59,37 @@ class PreferencesWindow: NSWindowController {
         }
     }
 
+    @IBAction func tokenCheckClicked(_ sender: Any) {
+        SentryAPI.isTokenValid(token: token.stringValue, withHandler: handleTokenValidation)
+    }
+
+    func handleTokenValidation(httpStatus: Int) {
+        NSLog("handleTokenValidation \(httpStatus)")
+        var statusColor: NSColor
+
+        if httpStatus == 200 {
+            statusColor = NSColor(red: 0.161, green: 0.807, blue: 0.260, alpha: 0.75)
+        } else {
+            statusColor = NSColor(red: 0.998, green: 0.375, blue: 0.347, alpha: 0.75)
+        }
+
+        DispatchQueue.main.async {
+            self.token.wantsLayer = true
+            self.token.layer?.borderWidth = 2.0
+            self.token.layer?.cornerRadius = 3.0
+            self.token.layer?.borderColor = statusColor.cgColor
+        }
+    }
+
     @IBAction func saveClicked(_ sender: Any) {
-        Config.configInstance.token = token.stringValue
+        Config.configInstance.token = self.token.stringValue
+        Config.configInstance.showIssueCount = self.showIssueCount.state.rawValue == 1
+        Config.configInstance.showEventCount = self.showEventCount.state.rawValue == 1
+        Config.configInstance.showCountTrend = self.showCountTrend.state.rawValue == 1
         Config.save()
+        NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.updateCountSig),
+                                        object: nil,
+                                        userInfo: nil)
     }
 
 }

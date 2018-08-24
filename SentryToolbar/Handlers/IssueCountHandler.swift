@@ -9,13 +9,18 @@
 import Foundation
 
 class IssueCountHandler: NSObject {
-    var lastTotal = Int64(0)
     static let updateCountSig = "IssueCountHandler.UpdateCount"
-    let trendUp = "\u{21E1}"
-    let trendDown = "\u{21E3}"
-    let trendUnchanged = "\u{00B7}"
-    let trendError = "\u{1541}"
-    var title = ""
+
+    var lastEventTotal = Int64(0)
+    var lastIssueTotal = Int64(0)
+    var currentEventTotal = Int64(0)
+    var currentIssueTotal = Int64(0)
+
+    let trendUp: String = "\u{21E1}"
+    let trendDown: String = "\u{21E3}"
+    let trendUnchanged: String = "\u{00B7}"
+    let trendError: String = "\u{1541}"
+    var title: String = ""
 
     override init() {
         super.init()
@@ -25,23 +30,56 @@ class IssueCountHandler: NSObject {
 
     @objc func updateCount(notification: NSNotification) {
         NSLog("IssueCountHandler.updateCount")
-        var total = Int64(0)
+
+        self.updateSum()
+        self.updateTitle()
+    }
+
+    func updateSum() {
+        var filterEventSum = Int64(0)
+        var filterIssueSum = Int64(0)
 
         for (_, filter) in Config.getActiveFilters() {
-            total += filter.getEventSum()
+            filterEventSum += filter.getEventSum()
+            filterIssueSum += Int64(filter.issues?.count ?? 0)
         }
-
-        updateTitle(total: total)
+        self.lastEventTotal = self.currentEventTotal
+        self.currentEventTotal = filterEventSum
+        self.lastIssueTotal = self.currentIssueTotal
+        self.currentIssueTotal = filterIssueSum
     }
 
-    func updateTitle(total: Int64) {
-        if total > lastTotal {
-            title = "\(total) \(trendUp)"
-        } else if total < lastTotal {
-            title = "\(total) \(trendDown)"
-        } else {
-            title = "\(total) \(trendUnchanged)"
+    func getTrend() -> String {
+        if self.currentEventTotal > self.lastEventTotal || self.currentIssueTotal > self.lastIssueTotal {
+            return self.trendUp
         }
-        self.lastTotal = total
+
+        if self.currentEventTotal < self.lastEventTotal && self.currentIssueTotal < self.lastIssueTotal {
+            return self.trendDown
+        }
+
+        return self.trendUnchanged
     }
+
+    func updateTitle() {
+        var newTitle = ""
+        if Config.configInstance.showIssueCount {
+            newTitle.append(self.lastIssueTotal.description)
+        }
+
+        if Config.configInstance.showIssueCount && Config.configInstance.showEventCount {
+            newTitle.append(":")
+        }
+
+        if Config.configInstance.showEventCount {
+            newTitle.append(self.lastEventTotal.description)
+        }
+
+        if Config.configInstance.showCountTrend {
+            newTitle.append(" \(self.getTrend())")
+        }
+
+        self.title = newTitle
+    }
+
 }
