@@ -13,7 +13,10 @@ struct Config: Codable {
     // ~/Library/Containers/br.com.eof.SentryToolbar/Data/.SentryToolbar.plist
     static let configFile = "\(NSHomeDirectory())/.SentryToolbar.plist"
     static let loopCycleSeconds = 60.0
-    var betaMode = false
+    var betaMode: Bool
+    var showIssueCount: Bool
+    var showEventCount: Bool
+    var showCountTrend: Bool
     static var configInstance: Config = loadConfig()
 
     var token: String
@@ -25,6 +28,20 @@ struct Config: Codable {
             "myfilterB": Filter(name: "myfilterB", organizationSlug: "orgA", projectSlug: "projectB")
         ]
         self.token = "<YOUR TOKEN HERE>"
+        self.betaMode = false
+        self.showIssueCount = false
+        self.showEventCount = true
+        self.showCountTrend = true
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.filters = try container.decodeIfPresent([String: Filter].self, forKey: .filters) ?? [:]
+        self.token = try container.decodeIfPresent(String.self, forKey: .token) ?? "<YOUR TOKEN HERE>"
+        self.betaMode = try container.decodeIfPresent(Bool.self, forKey: .betaMode) ?? false
+        self.showIssueCount = try container.decodeIfPresent(Bool.self, forKey: .showIssueCount) ?? false
+        self.showEventCount = try container.decodeIfPresent(Bool.self, forKey: .showEventCount) ?? true
+        self.showCountTrend = try container.decodeIfPresent(Bool.self, forKey: .showCountTrend) ?? true
     }
 
     func toDict() -> [String: Any] {
@@ -47,6 +64,7 @@ struct Config: Codable {
 
         var config: Config
         var data: Data
+
         do {
             data = try Data(contentsOf: URL(string: "file://\(Config.configFile)")!)
             let decoder = PropertyListDecoder()

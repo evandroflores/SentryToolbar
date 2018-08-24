@@ -12,7 +12,9 @@ class PreferencesWindow: NSWindowController {
 
     @IBOutlet weak var token: NSTextField!
     @IBOutlet weak var tokenCheckButton: NSButton!
-
+    @IBOutlet weak var showIssueCount: NSButton!
+    @IBOutlet weak var showEventCount: NSButton!
+    @IBOutlet weak var showCountTrend: NSButton!
     override func showWindow(_ sender: Any?) {
         super.showWindow(sender)
         self.window?.center()

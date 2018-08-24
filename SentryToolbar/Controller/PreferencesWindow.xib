@@ -8,6 +8,9 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PreferencesWindow" customModule="SentryToolbar" customModuleProvider="target">
             <connections>
+                <outlet property="showCountTrend" destination="Lig-2N-EcD" id="YXj-JP-D66"/>
+                <outlet property="showEventCount" destination="Ldu-yc-Rwd" id="6Qy-xt-EQZ"/>
+                <outlet property="showIssueCount" destination="b2a-5L-xyV" id="bJG-nJ-IiW"/>
                 <outlet property="token" destination="ZwA-tT-ED6" id="hbx-vV-eFc"/>
                 <outlet property="tokenCheckButton" destination="idQ-XQ-bEH" id="6xX-lQ-Quh"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
@@ -83,6 +86,30 @@
                         <connections>
                             <action selector="tokenCheckClicked:" target="-2" id="aru-Zj-3yA"/>
                         </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b2a-5L-xyV">
+                        <rect key="frame" x="51" y="139" width="109" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Show Issue Count" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="KEe-9D-0fA">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="label"/>
+                        </buttonCell>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ldu-yc-Rwd">
+                        <rect key="frame" x="185" y="139" width="111" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Show Event Count" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="e0r-ay-6Un">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="label"/>
+                        </buttonCell>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lig-2N-EcD">
+                        <rect key="frame" x="318" y="139" width="111" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Show Count Trend" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="dH0-Y8-9JB">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="label"/>
+                        </buttonCell>
                     </button>
                 </subviews>
             </view>
