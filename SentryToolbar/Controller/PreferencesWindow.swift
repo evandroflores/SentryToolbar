@@ -87,6 +87,9 @@ class PreferencesWindow: NSWindowController {
         Config.configInstance.showEventCount = self.showEventCount.state.rawValue == 1
         Config.configInstance.showCountTrend = self.showCountTrend.state.rawValue == 1
         Config.save()
+        NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.updateCountSig),
+                                        object: nil,
+                                        userInfo: nil)
     }
 
 }
