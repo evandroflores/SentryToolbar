@@ -12,12 +12,15 @@ struct Config: Codable {
     // Config will search plist file here
     // ~/Library/Containers/br.com.eof.SentryToolbar/Data/.SentryToolbar.plist
     static let configFile = "\(NSHomeDirectory())/.SentryToolbar.plist"
+    static var configInstance: Config = loadConfig()
+
     static let loopCycleSeconds = 60.0
     var betaMode: Bool
     var showIssueCount: Bool
     var showEventCount: Bool
     var showCountTrend: Bool
-    static var configInstance: Config = loadConfig()
+    var notifyNewIssue: Bool
+    var notifyNewCount: Bool
 
     var token: String
     var filters: [String: Filter]
@@ -32,6 +35,8 @@ struct Config: Codable {
         self.showIssueCount = false
         self.showEventCount = true
         self.showCountTrend = true
+        self.notifyNewIssue = true
+        self.notifyNewCount = true
     }
 
     init(from decoder: Decoder) throws {
@@ -42,6 +47,8 @@ struct Config: Codable {
         self.showIssueCount = try container.decodeIfPresent(Bool.self, forKey: .showIssueCount) ?? false
         self.showEventCount = try container.decodeIfPresent(Bool.self, forKey: .showEventCount) ?? true
         self.showCountTrend = try container.decodeIfPresent(Bool.self, forKey: .showCountTrend) ?? true
+        self.notifyNewIssue = try container.decodeIfPresent(Bool.self, forKey: .notifyNewIssue) ?? true
+        self.notifyNewCount = try container.decodeIfPresent(Bool.self, forKey: .notifyNewCount) ?? true
     }
 
     func toDict() -> [String: Any] {
