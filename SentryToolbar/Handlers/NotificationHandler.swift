@@ -26,6 +26,16 @@ class NotificationHandler: NSObject, NSUserNotificationCenterDelegate {
         let issue = notification.userInfo?["issue"] as? Issue
         let notificationType = notification.userInfo?["type"] as? String
 
+        if notificationType == NotificationHandler.newIssueLabel &&
+            !Config.configInstance.notifyNewIssue {
+            return
+        }
+
+        if notificationType == NotificationHandler.newEventCountLabel &&
+            !Config.configInstance.notifyNewCount {
+            return
+        }
+
         let userNotification = NSUserNotification()
         userNotification.title = notificationType ?? NotificationHandler.newEventCountLabel
         userNotification.subtitle = issue?.title ?? "Issue"
