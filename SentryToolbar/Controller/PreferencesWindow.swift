@@ -82,7 +82,10 @@ class PreferencesWindow: NSWindowController {
     }
 
     @IBAction func saveClicked(_ sender: Any) {
-        Config.configInstance.token = token.stringValue
+        Config.configInstance.token = self.token.stringValue
+        Config.configInstance.showIssueCount = self.showIssueCount.state.rawValue == 1
+        Config.configInstance.showEventCount = self.showEventCount.state.rawValue == 1
+        Config.configInstance.showCountTrend = self.showCountTrend.state.rawValue == 1
         Config.save()
     }
 
