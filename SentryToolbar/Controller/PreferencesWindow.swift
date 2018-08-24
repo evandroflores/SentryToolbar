@@ -23,6 +23,13 @@ class PreferencesWindow: NSWindowController {
         coverNonBeta()
 
         self.token.stringValue = Config.configInstance.token
+        self.showIssueCount.state = self.getState(shouldBeOn: Config.configInstance.showIssueCount)
+        self.showEventCount.state = self.getState(shouldBeOn: Config.configInstance.showEventCount)
+        self.showCountTrend.state = self.getState(shouldBeOn: Config.configInstance.showCountTrend)
+    }
+
+    private func getState(shouldBeOn: Bool) -> NSControl.StateValue {
+        return shouldBeOn ? NSControl.StateValue.on : NSControl.StateValue.off
     }
 
     override func windowDidLoad() {
