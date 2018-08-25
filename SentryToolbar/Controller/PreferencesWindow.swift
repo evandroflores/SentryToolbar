@@ -25,13 +25,13 @@ class PreferencesWindow: NSWindowController {
         NSApp.activate(ignoringOtherApps: true)
         coverNonBeta()
 
-        self.token.stringValue = Config.configInstance.token
-        self.showIssueCountCheck.state = self.getState(shouldBeOn: Config.configInstance.showIssueCount)
-        self.showEventCountCheck.state = self.getState(shouldBeOn: Config.configInstance.showEventCount)
-        self.showCountTrendCheck.state = self.getState(shouldBeOn: Config.configInstance.showCountTrend)
+        self.token.stringValue = Config.instance.token
+        self.showIssueCountCheck.state = self.getState(shouldBeOn: Config.instance.showIssueCount)
+        self.showEventCountCheck.state = self.getState(shouldBeOn: Config.instance.showEventCount)
+        self.showCountTrendCheck.state = self.getState(shouldBeOn: Config.instance.showCountTrend)
 
-        self.notifyNewIssueCheck.state = self.getState(shouldBeOn: Config.configInstance.notifyNewIssue)
-        self.notifyNewCountCheck.state = self.getState(shouldBeOn: Config.configInstance.notifyNewCount)
+        self.notifyNewIssueCheck.state = self.getState(shouldBeOn: Config.instance.notifyNewIssue)
+        self.notifyNewCountCheck.state = self.getState(shouldBeOn: Config.instance.notifyNewCount)
     }
 
     private func getState(shouldBeOn: Bool) -> NSControl.StateValue {
@@ -95,12 +95,12 @@ class PreferencesWindow: NSWindowController {
     @IBAction func notifyNewCountClicked(_ sender: Any) { self.save() }
 
     func save() {
-        Config.configInstance.token = self.token.stringValue
-        Config.configInstance.showIssueCount = self.showIssueCountCheck.state.rawValue == 1
-        Config.configInstance.showEventCount = self.showEventCountCheck.state.rawValue == 1
-        Config.configInstance.showCountTrend = self.showCountTrendCheck.state.rawValue == 1
-        Config.configInstance.notifyNewIssue = self.notifyNewIssueCheck.state.rawValue == 1
-        Config.configInstance.notifyNewCount = self.notifyNewCountCheck.state.rawValue == 1
+        Config.instance.token = self.token.stringValue
+        Config.instance.showIssueCount = self.showIssueCountCheck.state.rawValue == 1
+        Config.instance.showEventCount = self.showEventCountCheck.state.rawValue == 1
+        Config.instance.showCountTrend = self.showCountTrendCheck.state.rawValue == 1
+        Config.instance.notifyNewIssue = self.notifyNewIssueCheck.state.rawValue == 1
+        Config.instance.notifyNewCount = self.notifyNewCountCheck.state.rawValue == 1
 
         Config.save()
         NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.updateCountSig),
