@@ -63,19 +63,19 @@ class IssueCountHandler: NSObject {
 
     func updateTitle() {
         var newTitle = ""
-        if Config.configInstance.showIssueCount {
+        if Config.instance.showIssueCount {
             newTitle.append(self.lastIssueTotal.description)
         }
 
-        if Config.configInstance.showIssueCount && Config.configInstance.showEventCount {
+        if Config.instance.showIssueCount && Config.instance.showEventCount {
             newTitle.append(":")
         }
 
-        if Config.configInstance.showEventCount {
+        if Config.instance.showEventCount {
             newTitle.append(self.lastEventTotal.description)
         }
 
-        if Config.configInstance.showCountTrend {
+        if Config.instance.showCountTrend {
             newTitle.append(" \(self.getTrend())")
         }
 

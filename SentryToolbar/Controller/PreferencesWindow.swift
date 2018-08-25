@@ -22,10 +22,10 @@ class PreferencesWindow: NSWindowController {
         NSApp.activate(ignoringOtherApps: true)
         coverNonBeta()
 
-        self.token.stringValue = Config.configInstance.token
-        self.showIssueCount.state = self.getState(shouldBeOn: Config.configInstance.showIssueCount)
-        self.showEventCount.state = self.getState(shouldBeOn: Config.configInstance.showEventCount)
-        self.showCountTrend.state = self.getState(shouldBeOn: Config.configInstance.showCountTrend)
+        self.token.stringValue = Config.instance.token
+        self.showIssueCount.state = self.getState(shouldBeOn: Config.instance.showIssueCount)
+        self.showEventCount.state = self.getState(shouldBeOn: Config.instance.showEventCount)
+        self.showCountTrend.state = self.getState(shouldBeOn: Config.instance.showCountTrend)
     }
 
     private func getState(shouldBeOn: Bool) -> NSControl.StateValue {
@@ -40,7 +40,7 @@ class PreferencesWindow: NSWindowController {
     }
 
     func coverNonBeta() {
-        if !Config.configInstance.betaMode {
+        if !Config.instance.betaMode {
             let nonBetaText = NSTextField(frame: NSRect(x: 20, y: 20, width: 440, height: 197))
 
             nonBetaText.textColor = NSColor.red
@@ -82,10 +82,10 @@ class PreferencesWindow: NSWindowController {
     }
 
     @IBAction func saveClicked(_ sender: Any) {
-        Config.configInstance.token = self.token.stringValue
-        Config.configInstance.showIssueCount = self.showIssueCount.state.rawValue == 1
-        Config.configInstance.showEventCount = self.showEventCount.state.rawValue == 1
-        Config.configInstance.showCountTrend = self.showCountTrend.state.rawValue == 1
+        Config.instance.token = self.token.stringValue
+        Config.instance.showIssueCount = self.showIssueCount.state.rawValue == 1
+        Config.instance.showEventCount = self.showEventCount.state.rawValue == 1
+        Config.instance.showCountTrend = self.showCountTrend.state.rawValue == 1
         Config.save()
         NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.updateCountSig),
                                         object: nil,

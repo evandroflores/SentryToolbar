@@ -22,7 +22,7 @@ class SentryAPI {
 
     func fetchIssues(filter: Filter) {
         let url = getIssueEndpoint(filter: filter)
-        let token = Config.configInstance.token
+        let token = Config.instance.token
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.timeoutInterval = SentryAPI.timeoutInterval
@@ -60,7 +60,7 @@ class SentryAPI {
         do {
             let decoder = Issue.decoder()
             let issues = try decoder.decode([Issue].self, from: data)
-            Config.configInstance.filters[filter.name]?.updateIssues(newIssues: issues)
+            Config.instance.filters[filter.name]?.updateIssues(newIssues: issues)
 
             NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.updateCountSig),
                                             object: nil,
