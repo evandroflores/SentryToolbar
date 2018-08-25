@@ -18,7 +18,8 @@ struct Config: Codable {
     var showIssueCount: Bool
     var showEventCount: Bool
     var showCountTrend: Bool
-
+    var notifyNewIssue: Bool
+    var notifyNewCount: Bool
     var token: String
     var filters: [String: Filter]
 
@@ -32,6 +33,8 @@ struct Config: Codable {
         self.showIssueCount = false
         self.showEventCount = true
         self.showCountTrend = true
+        self.notifyNewIssue = true
+        self.notifyNewCount = true
     }
 
     init(from decoder: Decoder) throws {
@@ -42,6 +45,8 @@ struct Config: Codable {
         self.showIssueCount = try container.decodeIfPresent(Bool.self, forKey: .showIssueCount) ?? false
         self.showEventCount = try container.decodeIfPresent(Bool.self, forKey: .showEventCount) ?? true
         self.showCountTrend = try container.decodeIfPresent(Bool.self, forKey: .showCountTrend) ?? true
+        self.notifyNewIssue = try container.decodeIfPresent(Bool.self, forKey: .notifyNewIssue) ?? true
+        self.notifyNewCount = try container.decodeIfPresent(Bool.self, forKey: .notifyNewCount) ?? true
     }
 
     func toDict() -> [String: Any] {
