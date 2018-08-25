@@ -11,9 +11,8 @@ import Foundation
 struct Config: Codable {
     // Config will search plist file here
     // ~/Library/Containers/br.com.eof.SentryToolbar/Data/.SentryToolbar.plist
-    static let configFile = "\(NSHomeDirectory())/.SentryToolbar.plist"
-    static var configInstance: Config = loadConfig()
-
+    static let file = "\(NSHomeDirectory())/.SentryToolbar.plist"
+    static var instance: Config = load()
     static let loopCycleSeconds = 60.0
     var betaMode: Bool
     var showIssueCount: Bool
@@ -21,7 +20,6 @@ struct Config: Codable {
     var showCountTrend: Bool
     var notifyNewIssue: Bool
     var notifyNewCount: Bool
-
     var token: String
     var filters: [String: Filter]
 
@@ -62,10 +60,10 @@ struct Config: Codable {
         }
         return dict
     }
-    static func loadConfig() -> Config {
-        NSLog("Config.loadConfig - File[\(Config.configFile)]...")
-        if !FileManager.default.fileExists(atPath: Config.configFile) {
-            NSLog("Config.loadConfig - File [\(Config.configFile)] does not exists. Creating a sample...")
+    static func load() -> Config {
+        NSLog("Config.loadConfig - File[\(Config.file)]...")
+        if !FileManager.default.fileExists(atPath: Config.file) {
+            NSLog("Config.loadConfig - File [\(Config.file)] does not exists. Creating a sample...")
             Config.save()
         }
 
@@ -73,7 +71,7 @@ struct Config: Codable {
         var data: Data
 
         do {
-            data = try Data(contentsOf: URL(string: "file://\(Config.configFile)")!)
+            data = try Data(contentsOf: URL(string: "file://\(Config.file)")!)
             let decoder = PropertyListDecoder()
             config = try decoder.decode(Config.self, from: data)
         } catch {
@@ -88,16 +86,16 @@ struct Config: Codable {
         let encoder = PropertyListEncoder()
         encoder.outputFormat = .xml
         do {
-            let data = try encoder.encode(Config.configInstance)
-            try data.write(to: URL(string: "file://\(Config.configFile)")!)
+            let data = try encoder.encode(Config.instance)
+            try data.write(to: URL(string: "file://\(Config.file)")!)
         } catch {
-            NSLog("Config.createDefaultConfig - Fail to write default config: \(Config.configFile): " +
+            NSLog("Config.createDefaultConfig - Fail to write default config: \(Config.file): " +
                 "\(error.localizedDescription)")
         }
 
     }
 
     static func getActiveFilters() -> [String: Filter] {
-        return Config.configInstance.filters.filter({$0.1.isActive == true})
+        return Config.instance.filters.filter({$0.1.isActive == true})
     }
 }

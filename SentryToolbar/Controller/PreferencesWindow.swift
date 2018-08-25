@@ -46,7 +46,7 @@ class PreferencesWindow: NSWindowController {
     }
 
     func coverNonBeta() {
-        if !Config.configInstance.betaMode {
+        if !Config.instance.betaMode {
             let nonBetaText = NSTextField(frame: NSRect(x: 20, y: 20, width: 440, height: 197))
 
             nonBetaText.textColor = NSColor.red
@@ -101,6 +101,7 @@ class PreferencesWindow: NSWindowController {
         Config.configInstance.showCountTrend = self.showCountTrendCheck.state.rawValue == 1
         Config.configInstance.notifyNewIssue = self.notifyNewIssueCheck.state.rawValue == 1
         Config.configInstance.notifyNewCount = self.notifyNewCountCheck.state.rawValue == 1
+
         Config.save()
         NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.updateCountSig),
                                         object: nil,
