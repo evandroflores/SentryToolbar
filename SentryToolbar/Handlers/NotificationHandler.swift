@@ -27,12 +27,12 @@ class NotificationHandler: NSObject, NSUserNotificationCenterDelegate {
         let notificationType = notification.userInfo?["type"] as? String
 
         if notificationType == NotificationHandler.newIssueLabel &&
-            !Config.configInstance.notifyNewIssue {
+            !Config.instance.notifyNewIssue {
             return
         }
 
         if notificationType == NotificationHandler.newEventCountLabel &&
-            !Config.configInstance.notifyNewCount {
+            !Config.instance.notifyNewCount {
             return
         }
 
