@@ -87,8 +87,11 @@ class PreferencesWindow: NSWindowController {
         }
     }
 
-    @IBAction func saveClicked(_ sender: Any) { self.save() }
-    @IBAction func showIssueCountClicked(_ sender: Any) { self.save() }
+    @IBAction func saveClicked(_ sender: Any) {
+        self.save()
+        self.close()
+    }
+    @IBAction func showIssueCountClicked(_ sender: Any) {self.save() }
     @IBAction func showEventCountClicked(_ sender: Any) { self.save() }
     @IBAction func showCountTrendClicked(_ sender: Any) { self.save() }
     @IBAction func notifyNewIssueClicked(_ sender: Any) { self.save() }
@@ -96,11 +99,11 @@ class PreferencesWindow: NSWindowController {
 
     func save() {
         Config.instance.token = self.token.stringValue
-        Config.instance.showIssueCount = self.showIssueCountCheck.state.rawValue == 1
-        Config.instance.showEventCount = self.showEventCountCheck.state.rawValue == 1
-        Config.instance.showCountTrend = self.showCountTrendCheck.state.rawValue == 1
-        Config.instance.notifyNewIssue = self.notifyNewIssueCheck.state.rawValue == 1
-        Config.instance.notifyNewCount = self.notifyNewCountCheck.state.rawValue == 1
+        Config.instance.showIssueCount = self.showIssueCountCheck.state == NSControl.StateValue.on
+        Config.instance.showEventCount = self.showEventCountCheck.state == NSControl.StateValue.on
+        Config.instance.showCountTrend = self.showCountTrendCheck.state == NSControl.StateValue.on
+        Config.instance.notifyNewIssue = self.notifyNewIssueCheck.state == NSControl.StateValue.on
+        Config.instance.notifyNewCount = self.notifyNewCountCheck.state == NSControl.StateValue.on
 
         Config.save()
         NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.updateCountSig),
