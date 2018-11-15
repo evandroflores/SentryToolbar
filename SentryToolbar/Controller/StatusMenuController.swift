@@ -15,8 +15,8 @@ class StatusMenuController: NSObject {
     let issueCountHandler = IssueCountHandler()
 
     override func awakeFromNib() {
-        preferencesWindow = PreferencesWindow(windowNibName: NSNib.Name(rawValue: "PreferencesWindow"))
-        let icon = NSImage(named: NSImage.Name(rawValue: "ToolbarIcon"))
+        preferencesWindow = PreferencesWindow(windowNibName: "PreferencesWindow")
+        let icon = NSImage(named: "ToolbarIcon")
         icon?.isTemplate = true
         statusItem.image = icon
         statusItem.menu = statusMenu
