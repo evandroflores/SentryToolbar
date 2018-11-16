@@ -63,8 +63,8 @@ struct Config: Codable {
     static func load() -> Config {
         NSLog("Config.loadConfig - File[\(Config.file)]...")
         if !FileManager.default.fileExists(atPath: Config.file) {
-            NSLog("Config.loadConfig - File [\(Config.file)] does not exists. Creating a sample...")
-            Config.save()
+            NSLog("Config.loadConfig - File [\(Config.file)] does not exists.")
+            return Config()
         }
 
         var config: Config
