@@ -28,7 +28,8 @@ class SchedulerController: NSObject {
             NSLog("SchedulerController.loop Filter [\(filter.name)] " +
                   "-> Organization [\(filter.organizationSlug)] " +
                   "Project [\(filter.projectSlug)] " +
-                  "Query [\(filter.query)]")
+                  "Query [\(filter.query)] " +
+                  "Env [\(filter.environment)]")
 
             DispatchQueue.global(qos: DispatchQoS.background.qosClass).async {
                 self.sentryApi.fetchIssues(filter: filter)

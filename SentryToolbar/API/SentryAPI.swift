@@ -17,7 +17,8 @@ class SentryAPI {
         return URL(string:
             "\(SentryAPI.apiBaseUrl)" +
             "\(String(format: SentryAPI.issuesEndpoint, filter.organizationSlug, filter.projectSlug))" +
-            "\(getQueryParam(query: filter.query))")!
+            "\(getQueryParam(query: filter.query))" +
+            "\(getEnvParam(environment: filter.environment))")!
     }
 
     func fetchIssues(filter: Filter) {
@@ -78,6 +79,14 @@ class SentryAPI {
             return ""
         } else {
             return "?query=\(query)"
+        }
+    }
+
+    func getEnvParam(environment: String) -> String {
+        if environment.isEmpty {
+            return ""
+        } else {
+            return "&environment=\(environment)"
         }
     }
 
