@@ -33,23 +33,7 @@ struct Issue: Codable {
             formatter.locale = Locale(identifier: "en_US_POSIX")
             formatter.timeZone = TimeZone(secondsFromGMT: 0)
 
-            switch dateStr.count {
-            case 10:
-                formatter.dateFormat = "yyyy-MM-dd"
-            case 16:
-                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
-            case 19:
-                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-            case 20:
-                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-            case 23:
-                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
-            case 24:
-                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-            default:
-                NSLog("DATE \(dateStr) Unexpected date format.")
-                throw DateError.unexpectedFormat
-            }
+            try formatter.dateFormat = getFormatter(from: dateStr)
 
             if let date = formatter.date(from: dateStr) {
                 return date
@@ -66,5 +50,27 @@ struct Issue: Codable {
                 NotificationHandler.newIssueLabel:
                 NotificationHandler.newEventCountLabel,
             "issue": self]
+    }
+
+    static func getFormatter(from dateStr: String) throws -> String {
+        let dateFormat: String
+        switch dateStr.count {
+        case 10:
+            dateFormat = "yyyy-MM-dd"
+        case 16:
+            dateFormat = "yyyy-MM-dd'T'HH:mm"
+        case 19:
+            dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        case 20:
+            dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        case 23:
+            dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+        case 24:
+            dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        default:
+            NSLog("DATE \(dateStr) Unexpected date format.")
+            throw DateError.unexpectedFormat
+        }
+        return dateFormat
     }
 }
