@@ -28,6 +28,8 @@ Edit the config file to add your Sentry token, Organizationi slug, Project slug.
             <string>myproject</string>
             <key>query</key>
             <string>is:unresolved</string>
+            <key>environment</key>
+			  <string>production</string>
         </dict>
         <key>FilterB</key>
         <dict>
@@ -43,6 +45,8 @@ Edit the config file to add your Sentry token, Organizationi slug, Project slug.
             <string>myotherproject</string>
             <key>query</key>
             <string>is:unresolved</string>
+            <key>environment</key>
+			  <string></string>
         </dict>
     </dict>
     <key>token</key>
