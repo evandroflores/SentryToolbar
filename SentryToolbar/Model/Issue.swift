@@ -19,7 +19,9 @@ struct Issue: Codable {
 
     enum DateError: String, Error {
         case invalidDate
+        case unexpectedFormat
     }
+
     static func decoder() -> JSONDecoder {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
@@ -30,14 +32,29 @@ struct Issue: Codable {
             formatter.calendar = Calendar(identifier: .iso8601)
             formatter.locale = Locale(identifier: "en_US_POSIX")
             formatter.timeZone = TimeZone(secondsFromGMT: 0)
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+
+            switch dateStr.count {
+            case 10:
+                formatter.dateFormat = "yyyy-MM-dd"
+            case 16:
+                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
+            case 19:
+                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+            case 20:
+                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+            case 23:
+                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+            case 24:
+                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+            default:
+                NSLog("DATE \(dateStr) Unexpected date format.")
+                throw DateError.unexpectedFormat
+            }
+
             if let date = formatter.date(from: dateStr) {
                 return date
             }
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
-            if let date = formatter.date(from: dateStr) {
-                return date
-            }
+
             throw DateError.invalidDate
         })
         return decoder
