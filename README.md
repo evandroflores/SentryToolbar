@@ -2,13 +2,14 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/53e8279f6b0df5f9c9bf/maintainability)](https://codeclimate.com/github/evandroflores/SentryToolbar/maintainability)
 
-![](docs/SentryToolbarSample.png)
+<img src="docs/SentryToolbarSample.png" width=50%/>
+
 
 This is a ongoing pet project that aims to create a MacOS toolbar to follow errors on Sentry.
 
 Still in a very experimental phase. [PRs](https://github.com/evandroflores/SentryToolbar/pulls) and [issues](https://github.com/evandroflores/SentryToolbar/issues) are very welcome.
 
-Edit the config file to add your Sentry token, Organizationi slug, Project slug...
+Edit the config file to add your Sentry token, Organization slug, Project slug...
     `~/Library/Containers/br.com.eof.SentryToolbar/Data/.SentryToolbar.plist`
 
 ```
