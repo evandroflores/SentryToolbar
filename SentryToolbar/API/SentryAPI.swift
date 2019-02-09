@@ -62,11 +62,6 @@ class SentryAPI {
             let decoder = Issue.decoder()
             let issues = try decoder.decode([Issue].self, from: data)
             Config.instance.filters[filter.name]?.updateIssues(newIssues: issues)
-
-            NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.updateCountSig),
-                                            object: nil,
-                                            userInfo: nil)
-
         } catch {
             let rawData = String(data: data, encoding: .utf8)
             NSLog("Error trying to parse Json Filter[\(filter.name)] " +
