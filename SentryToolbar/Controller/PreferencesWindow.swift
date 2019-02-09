@@ -107,7 +107,7 @@ class PreferencesWindow: NSWindowController {
 
         Config.save()
         NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.updateCountSig),
-                                        object: nil,
+                                        object: Config.instance,
                                         userInfo: nil)
     }
 

@@ -36,6 +36,13 @@ struct Filter: Codable {
         case isActive
     }
 
+    func getIssueCount() -> Int64 {
+        if self.issues == nil {
+            return Int64(0)
+        }
+        return Int64(self.issues!.count)
+    }
+
     func getEventSum() -> Int64 {
         var totalEvents = Int64(0)
         if self.issues != nil {
@@ -51,6 +58,7 @@ struct Filter: Codable {
 
     mutating func updateIssues(newIssues: [Issue]) {
         self.issues = newIssues
+        self.sendCountUpdate()
         self.warnNewIssuesOrEventCount()
     }
 
@@ -63,5 +71,11 @@ struct Filter: Codable {
                                                 object: nil, userInfo: issue.toNotification())
             }
         }
+    }
+
+    func sendCountUpdate() {
+        NotificationCenter.default.post(name: Notification.Name(IssueCountHandler.updateCountSig),
+                                        object: self,
+                                        userInfo: nil)
     }
 }

@@ -9,6 +9,8 @@
 import Foundation
 
 class IssueCountHandler: NSObject {
+    private let concurrentQueue = DispatchQueue(label: "ConcurrentQueue", attributes: .concurrent, target: nil)
+
     static let updateCountSig = "IssueCountHandler.UpdateCount"
 
     var lastEventTotal = Int64(0)
@@ -21,8 +23,12 @@ class IssueCountHandler: NSObject {
     let trendUnchanged: String = "\u{00B7}"
     let trendError: String = "\u{1541}"
     var title: String = ""
+    var config: Config
+
+    var counter: [String: [String: Int64]] = [:]
 
     override init() {
+        config = Config.instance
         super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateCount(notification:)),
                                                name: Notification.Name(IssueCountHandler.updateCountSig), object: nil)
@@ -30,18 +36,31 @@ class IssueCountHandler: NSObject {
 
     @objc func updateCount(notification: NSNotification) {
         NSLog("IssueCountHandler.updateCount")
-
-        self.updateSum()
-        self.updateTitle()
+        concurrentQueue.sync {
+            if let filter = notification.object as? Filter {
+                NSLog("...in sync for \(filter.name)")
+                counter[filter.name] = ["issues": filter.getIssueCount(),
+                                        "events": filter.getEventSum()]
+                NSLog("COUNTER \(counter)")
+                self.updateSum()
+            } else if let config = notification.object as? Config {
+                NSLog("Updating Config")
+                self.config = config
+            } else {
+                NSLog("Not a Filter nor Config. Nothing to update")
+            }
+            self.updateTitle()
+        }
     }
 
     func updateSum() {
         var filterEventSum = Int64(0)
         var filterIssueSum = Int64(0)
 
-        for (_, filter) in Config.getActiveFilters() {
-            filterEventSum += filter.getEventSum()
-            filterIssueSum += Int64(filter.issues?.count ?? 0)
+        for (_, filterCounter) in self.counter {
+            NSLog("Updating \(filterCounter)")
+            filterIssueSum += filterCounter["issues"]!
+            filterEventSum += filterCounter["events"]!
         }
         self.lastEventTotal = self.currentEventTotal
         self.currentEventTotal = filterEventSum
@@ -63,19 +82,19 @@ class IssueCountHandler: NSObject {
 
     func updateTitle() {
         var newTitle = ""
-        if Config.instance.showIssueCount {
-            newTitle.append(self.lastIssueTotal.description)
+        if self.config.showIssueCount {
+            newTitle.append(self.currentIssueTotal.description)
         }
 
-        if Config.instance.showIssueCount && Config.instance.showEventCount {
+        if self.config.showIssueCount && self.config.showEventCount {
             newTitle.append(":")
         }
 
-        if Config.instance.showEventCount {
-            newTitle.append(self.lastEventTotal.description)
+        if self.config.showEventCount {
+            newTitle.append(self.currentEventTotal.description)
         }
 
-        if Config.instance.showCountTrend {
+        if self.config.showCountTrend {
             newTitle.append(" \(self.getTrend())")
         }
 
