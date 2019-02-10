@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34057A732210CAB900330C61 /* ConfigCopyListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34057A722210CAB900330C61 /* ConfigCopyListener.swift */; };
 		340B4DBB1FF2A245006A4108 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340B4DBA1FF2A245006A4108 /* Issue.swift */; };
 		341017112060642F00450981 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341017102060642F00450981 /* NotificationHandler.swift */; };
 		3479767B1F87FA3D001109F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3479767A1F87FA3D001109F0 /* AppDelegate.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		34057A722210CAB900330C61 /* ConfigCopyListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigCopyListener.swift; sourceTree = "<group>"; };
 		340B4DBA1FF2A245006A4108 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		341017102060642F00450981 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 		347976771F87FA3D001109F0 /* SentryToolbar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SentryToolbar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +70,7 @@
 			children = (
 				34BFEA5B205F197900283141 /* IssueCountHandler.swift */,
 				341017102060642F00450981 /* NotificationHandler.swift */,
+				34057A722210CAB900330C61 /* ConfigCopyListener.swift */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				3479767B1F87FA3D001109F0 /* AppDelegate.swift in Sources */,
 				341017112060642F00450981 /* NotificationHandler.swift in Sources */,
 				34C7349F205EA2AD002BA603 /* SchedulerController.swift in Sources */,
+				34057A732210CAB900330C61 /* ConfigCopyListener.swift in Sources */,
 				34C41957206D67F70072AE21 /* PreferencesWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

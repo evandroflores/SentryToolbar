@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-class NotificationHandler: NSObject, NSUserNotificationCenterDelegate {
+class NotificationHandler: ConfigCopyListener, NSUserNotificationCenterDelegate {
     static let notificationSig = "NotificationSig.showNotification"
     static let newEventCountLabel = "New Issue Event"
     static let newIssueLabel = "New Issue"
@@ -27,12 +27,12 @@ class NotificationHandler: NSObject, NSUserNotificationCenterDelegate {
         let notificationType = notification.userInfo?["type"] as? String
 
         if notificationType == NotificationHandler.newIssueLabel &&
-            !Config.instance.notifyNewIssue {
+            !self.config.notifyNewIssue {
             return
         }
 
         if notificationType == NotificationHandler.newEventCountLabel &&
-            !Config.instance.notifyNewCount {
+            !self.config.notifyNewCount {
             return
         }
 

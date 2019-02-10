@@ -11,6 +11,7 @@ import Foundation
 struct Config: Codable {
     // Config will search plist file here
     // ~/Library/Containers/br.com.eof.SentryToolbar/Data/.SentryToolbar.plist
+    static let updateConfigSig = "ConfigSig.update"
     static let file = "\(NSHomeDirectory())/.SentryToolbar.plist"
     static var instance: Config = load()
     static let loopCycleSeconds = 60.0
@@ -92,7 +93,9 @@ struct Config: Codable {
             NSLog("Config.createDefaultConfig - Fail to write default config: \(Config.file): " +
                 "\(error.localizedDescription)")
         }
-
+        NotificationCenter.default.post(name: Notification.Name(Config.updateConfigSig),
+                                        object: Config.instance,
+                                        userInfo: nil)
     }
 
     static func getActiveFilters() -> [String: Filter] {
