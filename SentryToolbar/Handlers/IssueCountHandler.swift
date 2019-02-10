@@ -32,6 +32,9 @@ class IssueCountHandler: NSObject {
         super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateCount(notification:)),
                                                name: Notification.Name(IssueCountHandler.updateCountSig), object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateConfigCopy(notification:)),
+                                               name: Notification.Name(Config.updateConfigSig), object: nil)
     }
 
     @objc func updateCount(notification: NSNotification) {
@@ -43,14 +46,21 @@ class IssueCountHandler: NSObject {
                                         "events": filter.getEventSum()]
                 NSLog("COUNTER \(counter)")
                 self.updateSum()
-            } else if let config = notification.object as? Config {
-                NSLog("Updating Config")
-                self.config = config
             } else {
-                NSLog("Not a Filter nor Config. Nothing to update")
+                NSLog("Not a Filter. Nothing to update")
             }
             self.updateTitle()
         }
+    }
+
+    @objc func updateConfigCopy(notification: NSNotification) {
+        if let config = notification.object as? Config {
+            NSLog("Updating Config")
+            self.config = config
+        } else {
+            NSLog("Not a Config. Nothing to update")
+        }
+        self.updateTitle()
     }
 
     func updateSum() {

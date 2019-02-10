@@ -13,26 +13,37 @@ class NotificationHandler: NSObject, NSUserNotificationCenterDelegate {
     static let notificationSig = "NotificationSig.showNotification"
     static let newEventCountLabel = "New Issue Event"
     static let newIssueLabel = "New Issue"
+    var config: Config
 
     override init() {
+        config = Config.instance
         super.init()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.showNotification(notification:)),
                                                name: Notification.Name(NotificationHandler.notificationSig),
                                                object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateConfigCopy(notification:)),
+                                               name: Notification.Name(Config.updateConfigSig), object: nil)
     }
-
+    @objc func updateConfigCopy(notification: NSNotification) {
+        if let config = notification.object as? Config {
+            NSLog("Updating Config")
+            self.config = config
+        } else {
+            NSLog("Not a Config. Nothing to update")
+        }
+    }
     @objc func showNotification(notification: NSNotification) {
         let issue = notification.userInfo?["issue"] as? Issue
         let notificationType = notification.userInfo?["type"] as? String
 
         if notificationType == NotificationHandler.newIssueLabel &&
-            !Config.instance.notifyNewIssue {
+            !self.config.notifyNewIssue {
             return
         }
 
         if notificationType == NotificationHandler.newEventCountLabel &&
-            !Config.instance.notifyNewCount {
+            !self.config.notifyNewCount {
             return
         }
 
