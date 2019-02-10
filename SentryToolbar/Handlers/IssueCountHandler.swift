@@ -77,6 +77,7 @@ class IssueCountHandler: ConfigCopyListener {
 
     func updateTitle() {
         var newTitle = ""
+
         if self.config.showIssueCount {
             newTitle.append(self.currentIssueTotal.description)
         }
