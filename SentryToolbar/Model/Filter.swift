@@ -63,9 +63,10 @@ struct Filter: Codable {
     }
 
     func warnNewIssuesOrEventCount() {
-        let lastRun = Date().addingTimeInterval(Config.loopCycleSeconds * -1)
+        let lastRun = Date().addingTimeInterval(Config.loopCycleSeconds * -2)
         for issue in issues! {
             let diff = issue.lastSeen.timeIntervalSince(lastRun)
+
             if diff > 0 {
                 NotificationCenter.default.post(name: Notification.Name(NotificationHandler.notificationSig),
                                                 object: nil, userInfo: issue.toNotification())
