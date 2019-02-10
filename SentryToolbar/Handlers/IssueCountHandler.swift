@@ -8,7 +8,7 @@
 
 import Foundation
 
-class IssueCountHandler: NSObject {
+class IssueCountHandler: ConfigCopyListener {
     private let concurrentQueue = DispatchQueue(label: "ConcurrentQueue", attributes: .concurrent, target: nil)
 
     static let updateCountSig = "IssueCountHandler.UpdateCount"
@@ -23,18 +23,13 @@ class IssueCountHandler: NSObject {
     let trendUnchanged: String = "\u{00B7}"
     let trendError: String = "\u{1541}"
     var title: String = ""
-    var config: Config
 
     var counter: [String: [String: Int64]] = [:]
 
     override init() {
-        config = Config.instance
         super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateCount(notification:)),
                                                name: Notification.Name(IssueCountHandler.updateCountSig), object: nil)
-
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateConfigCopy(notification:)),
-                                               name: Notification.Name(Config.updateConfigSig), object: nil)
     }
 
     @objc func updateCount(notification: NSNotification) {
@@ -51,16 +46,6 @@ class IssueCountHandler: NSObject {
             }
             self.updateTitle()
         }
-    }
-
-    @objc func updateConfigCopy(notification: NSNotification) {
-        if let config = notification.object as? Config {
-            NSLog("Updating Config")
-            self.config = config
-        } else {
-            NSLog("Not a Config. Nothing to update")
-        }
-        self.updateTitle()
     }
 
     func updateSum() {
