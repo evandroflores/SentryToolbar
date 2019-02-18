@@ -1,6 +1,7 @@
 # SentryToolbar
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/53e8279f6b0df5f9c9bf/maintainability)](https://codeclimate.com/github/evandroflores/SentryToolbar/maintainability)
+[![codebeat badge](https://codebeat.co/badges/eb0e955c-e325-43ff-99eb-a2771e247016)](https://codebeat.co/projects/github-com-evandroflores-sentrytoolbar-master)
 
 <img src="docs/SentryToolbarSample.png" width=50%/>
 
