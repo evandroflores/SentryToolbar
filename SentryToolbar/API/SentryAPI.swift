@@ -18,7 +18,8 @@ class SentryAPI {
             "\(SentryAPI.apiBaseUrl)" +
             "\(String(format: SentryAPI.issuesEndpoint, filter.organizationSlug, filter.projectSlug))" +
             "\(getQueryParam(query: filter.query))" +
-            "\(getEnvParam(environment: filter.environment))")!
+            "\(getEnvParam(environment: filter.environment))" +
+            "\(getStatusPeriodParam(statusPeriod: filter.statsPeriod))")!
     }
 
     func fetchIssues(filter: Filter) {
@@ -82,6 +83,14 @@ class SentryAPI {
             return ""
         } else {
             return "&environment=\(environment)"
+        }
+    }
+
+    func getStatusPeriodParam(statusPeriod: String) -> String {
+        if statusPeriod.isEmpty {
+            return ""
+        } else {
+            return "&statsPeriod=\(statusPeriod)"
         }
     }
 

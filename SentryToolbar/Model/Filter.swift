@@ -14,16 +14,18 @@ struct Filter: Codable {
     var projectSlug: String
     var query: String
     var environment: String
+    var statsPeriod: String
     var isActive: Bool = true
     var issues: [Issue]?
 
     init(name: String, organizationSlug: String, projectSlug: String,
-         query: String = "is:unresolved", environment: String = "", isActive: Bool = true) {
+         query: String = "is:unresolved", environment: String = "", statsPeriod: String = "30d", isActive: Bool = true) {
         self.name = name
         self.organizationSlug = organizationSlug
         self.projectSlug = projectSlug
         self.query = query
         self.environment = environment
+        self.statsPeriod = statsPeriod
         self.issues = []
     }
 
@@ -33,6 +35,7 @@ struct Filter: Codable {
         case projectSlug
         case query
         case environment
+        case statsPeriod
         case isActive
     }
 
