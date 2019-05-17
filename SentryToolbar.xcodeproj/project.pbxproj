@@ -25,8 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		34057A722210CAB900330C61 /* ConfigCopyListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigCopyListener.swift; sourceTree = "<group>"; };
 		189D188D9341CBBA9585B488 /* Pods_SentryToolbar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SentryToolbar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		34057A722210CAB900330C61 /* ConfigCopyListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigCopyListener.swift; sourceTree = "<group>"; };
 		340B4DBA1FF2A245006A4108 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		341017102060642F00450981 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 		347976771F87FA3D001109F0 /* SentryToolbar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SentryToolbar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,7 +146,6 @@
 				B426A76D726112615E5BA3EE /* Pods-SentryToolbar.debug.xcconfig */,
 				DAC90B9E723F47E2C11D9827 /* Pods-SentryToolbar.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -185,7 +184,7 @@
 				TargetAttributes = {
 					347976761F87FA3D001109F0 = {
 						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -443,7 +442,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.eof.SentryToolbar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -462,7 +461,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.eof.SentryToolbar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
