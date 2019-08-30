@@ -10,6 +10,8 @@ This is a ongoing pet project that aims to create a MacOS toolbar to follow erro
 
 Still in a very experimental phase. [PRs](https://github.com/evandroflores/SentryToolbar/pulls) and [issues](https://github.com/evandroflores/SentryToolbar/issues) are very welcome.
 
+If you want to give a try, you can download the app [here](https://www.dropbox.com/s/agnegewxdwm2tnk/SentryToolbar.app.zip?dl=0)
+
 Edit the config file to add your Sentry token, Organization slug, Project slug...
     `~/Library/Containers/br.com.eof.SentryToolbar/Data/.SentryToolbar.plist`
 
