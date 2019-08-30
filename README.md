@@ -19,32 +19,32 @@ Edit the config file to add your Sentry token, Organization slug, Project slug..
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>filters</key>
-	<dict>
-		<key>FilterA</key>
-		<dict>
-			<key>environment</key>
-			<string></string>
-			<key>isActive</key>
-			<true/>
-			<key>name</key>
-			<string>FilterA</string>
-			<key>organizationSlug</key>
-			<string>myorg</string>
-			<key>projectSlug</key>
-			<string>frontend</string>
-			<key>query</key>
-			<string>is:unresolved</string>
-			<key>statsPeriod</key>
-			<string>14d</string>
-		</dict>
-		<key>FilterB</key>
-        <dict>
+   <dict>
+      <key>filters</key>
+      <dict>
+         <key>FilterA</key>
+         <dict>
             <key>environment</key>
-            <string></string>
+            <string />
             <key>isActive</key>
-            <true/>
+            <true />
+            <key>name</key>
+            <string>FilterA</string>
+            <key>organizationSlug</key>
+            <string>myorg</string>
+            <key>projectSlug</key>
+            <string>frontend</string>
+            <key>query</key>
+            <string>is:unresolved</string>
+            <key>statsPeriod</key>
+            <string>14d</string>
+         </dict>
+         <key>FilterB</key>
+         <dict>
+            <key>environment</key>
+            <string />
+            <key>isActive</key>
+            <true />
             <key>name</key>
             <string>FilterB</string>
             <key>organizationSlug</key>
@@ -55,20 +55,20 @@ Edit the config file to add your Sentry token, Organization slug, Project slug..
             <string>is:unresolved+package.name</string>
             <key>statsPeriod</key>
             <string>14d</string>
-        </dict>
-	</dict>
-	<key>notifyNewCount</key>
-	<true/>
-	<key>notifyNewIssue</key>
-	<true/>
-	<key>showCountTrend</key>
-	<true/>
-	<key>showEventCount</key>
-	<true/>
-	<key>showIssueCount</key>
-	<true/>
-	<key>token</key>
-	<string>YOUR TOKEN</string>
-</dict>
+         </dict>
+      </dict>
+      <key>notifyNewCount</key>
+      <true />
+      <key>notifyNewIssue</key>
+      <true />
+      <key>showCountTrend</key>
+      <true />
+      <key>showEventCount</key>
+      <true />
+      <key>showIssueCount</key>
+      <true />
+      <key>token</key>
+      <string>YOUR TOKEN</string>
+   </dict>
 </plist>
 ```
