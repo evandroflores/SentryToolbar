@@ -23,8 +23,6 @@ class PreferencesWindow: NSWindowController {
         self.window?.center()
         self.window?.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
-        coverNonBeta()
-
         self.token.stringValue = Config.instance.token
         self.showIssueCountCheck.state = self.getState(shouldBeOn: Config.instance.showIssueCount)
         self.showEventCountCheck.state = self.getState(shouldBeOn: Config.instance.showEventCount)
@@ -43,20 +41,6 @@ class PreferencesWindow: NSWindowController {
 
         self.window?.makeFirstResponder(self)
         self.token.focusRingType = NSFocusRingType.none
-    }
-
-    func coverNonBeta() {
-        if !Config.instance.betaMode {
-            let nonBetaText = NSTextField(frame: NSRect(x: 20, y: 20, width: 440, height: 197))
-
-            nonBetaText.textColor = NSColor.red
-            nonBetaText.stringValue = """
-            For now, to change the preferences, edit the file:
-
-            ~/Library/Containers/br.com.eof.SentryToolbar/Data/.SentryToolbar.plist
-            """
-        self.window?.contentView?.addSubview(nonBetaText)
-        }
     }
 
     @IBAction func tokenHelpClicked(_ sender: Any) {

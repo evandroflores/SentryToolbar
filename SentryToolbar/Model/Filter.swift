@@ -20,7 +20,7 @@ struct Filter: Codable {
 
     init(name: String, organizationSlug: String, projectSlug: String,
          query: String = "is:unresolved", environment: String = "",
-         statsPeriod: String = "30d", isActive: Bool = true) {
+         statsPeriod: String = "14d", isActive: Bool = true) {
         self.name = name
         self.organizationSlug = organizationSlug
         self.projectSlug = projectSlug
