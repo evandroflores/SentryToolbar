@@ -10,6 +10,8 @@ This is a ongoing pet project that aims to create a MacOS toolbar to follow erro
 
 Still in a very experimental phase. [PRs](https://github.com/evandroflores/SentryToolbar/pulls) and [issues](https://github.com/evandroflores/SentryToolbar/issues) are very welcome.
 
+If you want to give a try, you can download the app [here](https://www.dropbox.com/s/3pmlkmo2d4kya4d/SentryToolbar.app.zip?dl=0)
+
 Edit the config file to add your Sentry token, Organization slug, Project slug...
     `~/Library/Containers/br.com.eof.SentryToolbar/Data/.SentryToolbar.plist`
 
@@ -17,48 +19,56 @@ Edit the config file to add your Sentry token, Organization slug, Project slug..
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-    <key>filters</key>
-    <dict>
-        <key>FilterA</key>
-        <dict>
+   <dict>
+      <key>filters</key>
+      <dict>
+         <key>FilterA</key>
+         <dict>
+            <key>environment</key>
+            <string />
             <key>isActive</key>
-            <true/>
-            <key>issues</key>
-            <array/>
+            <true />
             <key>name</key>
             <string>FilterA</string>
             <key>organizationSlug</key>
-            <string>myorganization</string>
+            <string>myorg</string>
             <key>projectSlug</key>
-            <string>myproject</string>
+            <string>frontend</string>
             <key>query</key>
             <string>is:unresolved</string>
+            <key>statsPeriod</key>
+            <string>14d</string>
+         </dict>
+         <key>FilterB</key>
+         <dict>
             <key>environment</key>
-            <string>production</string>
-        </dict>
-        <key>FilterB</key>
-        <dict>
+            <string />
             <key>isActive</key>
-            <true/>
-            <key>issues</key>
-            <array/>
+            <true />
             <key>name</key>
             <string>FilterB</string>
             <key>organizationSlug</key>
-            <string>myorganization</string>
+            <string>myorg</string>
             <key>projectSlug</key>
-            <string>myotherproject</string>
+            <string>backend</string>
             <key>query</key>
-            <string>is:unresolved</string>
-            <key>environment</key>
-            <string></string>
-        </dict>
-    </dict>
-    <key>token</key>
-    <string>YOUR TOKEN</string>
-    <key>betaMode</key>
-    <false/>
-</dict>
+            <string>is:unresolved+package.name</string>
+            <key>statsPeriod</key>
+            <string>14d</string>
+         </dict>
+      </dict>
+      <key>notifyNewCount</key>
+      <true />
+      <key>notifyNewIssue</key>
+      <true />
+      <key>showCountTrend</key>
+      <true />
+      <key>showEventCount</key>
+      <true />
+      <key>showIssueCount</key>
+      <true />
+      <key>token</key>
+      <string>YOUR TOKEN</string>
+   </dict>
 </plist>
 ```
